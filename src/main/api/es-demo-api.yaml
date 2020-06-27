@@ -240,7 +240,7 @@ paths:
           in: query
           name: pageSize
           required: true
-          type: string
+          type: integer
         - description: Market specific request.
           in: header
           name: sats-marketid
@@ -255,7 +255,7 @@ paths:
           in: path
           name: restaurantId
           required: true
-          type: string 
+          type: integer 
           
       
       responses:

@@ -16,7 +16,7 @@ import com.api.sats.es.model.GeneralStatus;
 import com.api.sats.es.model.Location;
 import com.api.sats.es.model.Restaurant;
 import com.api.sats.es.model.StoreType;
-import com.api.sats.es.service.EsService;
+import com.api.sats.es.service.RestaurantService;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
@@ -26,24 +26,32 @@ public class TestEsController {
 	MockMvc mockMvc;
 	
 	@MockBean
-	private EsService esService;
+	private RestaurantService restService;
 	
 	@Test
 	void searchRestaurantByRestaurantId_Success_Response() throws Exception {
 		Restaurant restaurant = RestaruantObject();
-		when(esService.searchByRestaurantId()).thenReturn(null);
+		when(restService.searchByRestaurantId(5, "US", "abc", 1349)).thenReturn(null);
+		
+	}
+	
+	@Test
+	Restaurant ingestRestaurant_Success() {
+		Restaurant restaurant = RestaruantObject();
+		when(restService.ingestRestaurant("US", "en-US", "12345", restaurant)).thenReturn(null);
+		return null;
 		
 	}
 	
 	Restaurant RestaruantObject() {
 		Restaurant restaurant = new Restaurant();
-		restaurant.setId("195500273006:en-US");
+//		restaurant.setId("195500273006:en-US");
 		restaurant.setNationalStoreNumber(1349);
 		restaurant.setStoreIdentifierType("NATLSTRNUMBER");
-		restaurant.setLocalization("en-US");
+//		restaurant.setLocalization("en-US");
 		restaurant.setGblNumber("195500273006");
 		restaurant.setCountryCode("US");
-		restaurant.setMarketCode("US");
+//		restaurant.setMarketCode("US");
 		restaurant.setAddress(new Address("USA", "MO", 64119, "Claycomo", "290 E 69 Hwy", "DENVER FIELD OFFICE"));
 		restaurant.setGeneralStatus(new GeneralStatus("OPEN", "26-02-2019", "15-02-2025"));
 		restaurant.setCurrentStatus(new CurrentStatus("OPEN", "26-02-2019", "15-02-2025"));

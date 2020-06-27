@@ -13,6 +13,5 @@ import com.api.sats.es.model.Restaurant;
  */
 public interface RestaurantSearchRepository extends ElasticsearchRepository<Restaurant, String> {
 
-	Restaurant findBynationalStoreNumberAndmarketCode(int restaurantId, String marketId);
 
 }
