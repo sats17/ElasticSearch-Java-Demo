@@ -3,18 +3,22 @@
  */
 package com.api.sats.es.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author satikumb
  *
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class StoreType {
 	
 	@JsonProperty("storeTypeCode")
 	private String storeTypeCode;
 	@JsonProperty("partyName")
 	private String partyName;
+	
+	public StoreType() {}
 	
 	public StoreType(String storeTypeCode, String partyName) {
 		super();

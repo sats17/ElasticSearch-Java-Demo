@@ -5,12 +5,14 @@ package com.api.sats.es.model;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author satikumb
  *
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Document(indexName = "esrestaurants")
 public class Restaurant {
 	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.api.sats.es.data.RestaurantSearchRepository;
 import com.api.sats.es.exception.ElasticSearchException;
+import com.api.sats.es.exception.InternalServerException;
 import com.api.sats.es.model.Restaurant;
 import com.api.sats.es.utilites.ApiResponeUtility;
 
@@ -25,17 +26,11 @@ public class ElasticSearchService {
 	@Autowired
 	private ApiResponeUtility apiResponseUtility;
 	
-	public Restaurant insert(Restaurant restaurant) {
-		Restaurant response;
+	public Restaurant insert(Restaurant restaurant) throws ElasticSearchException {
 		try {
-			response = restaurantRepository.save(restaurant);
+			return restaurantRepository.save(restaurant);
 		} catch (Exception exception) {
-			return null;
-		}
-		if(response == null) {
-			return null;
-		} else {
-			return response;
+			throw new ElasticSearchException(apiResponseUtility.applicationProcessingException());
 		}
 	}
 

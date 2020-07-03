@@ -3,12 +3,14 @@
  */
 package com.api.sats.es.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author satikumb
  *
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Location {
 
 	@JsonProperty("latitude")
@@ -16,6 +18,8 @@ public class Location {
 	
 	@JsonProperty("longtitude")
 	private Double longtitude;
+	
+	public Location() {}
 
 	public Location(Double latitude, Double longtitude) {
 		super();
