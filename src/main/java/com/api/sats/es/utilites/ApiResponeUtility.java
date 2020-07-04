@@ -6,6 +6,7 @@ package com.api.sats.es.utilites;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.api.sats.es.exception.HeaderValidationException;
 import com.api.sats.es.model.Restaurant;
 import com.api.sats.es.response.ErrorDetails;
 import com.api.sats.es.response.ErrorResponse;
@@ -50,13 +51,15 @@ public class ApiResponeUtility {
 		return new ResponseEntity<Object>(new FinalResponse(INGEST_RESTAURANT_SUCCESS,responseList),getHttpHeaders(uuid), HttpStatus.OK);
 	}
 	
-	private static final ErrorResponse HEADER_VALIDATION_EXCEPTION = new ErrorResponse(
-			new ErrorStatus(HEADER_VALIDATION_EXCEPTION_ROOT_CODE, HEADER_VALIDATION_EXCEPTION_ROOT_TYPE,
-					Collections.singletonList(new ErrorDetails(HEADER_VALIDATION_EXCEPTION_RESULT_CODE,
-							HEADER_VALIDATION_EXCEPTION_RESULT_TYPE, HEADER_VALIDATION_EXCEPTION_RESULT_MESSAGE))));
+			
+	private static final ErrorResponse HeaderValidationException(String Message) {
+		return new ErrorResponse(new ErrorStatus(HEADER_VALIDATION_EXCEPTION_ROOT_CODE, HEADER_VALIDATION_EXCEPTION_ROOT_TYPE,
+				Collections.singletonList(new ErrorDetails(HEADER_VALIDATION_EXCEPTION_RESULT_CODE,
+						HEADER_VALIDATION_EXCEPTION_RESULT_TYPE, Message))));		
+	}
 
-	public ResponseEntity<Object> missingRequestHeaderException(String uuid) {
-		return new ResponseEntity<Object>(HEADER_VALIDATION_EXCEPTION,getHttpHeaders(uuid),
+	public ResponseEntity<Object> missingRequestHeaderException(String uuid, String Message) {
+		return new ResponseEntity<Object>(HeaderValidationException(Message),getHttpHeaders(uuid),
 				HttpStatus.BAD_REQUEST);
 	}
 	

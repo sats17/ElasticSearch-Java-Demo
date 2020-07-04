@@ -80,42 +80,90 @@ public class RestaurantControllerIT {
 	}
 	
 	
-//	@Test
-//	void ingestRestaurant_Success() throws Exception {
-//		ObjectMapper mapper = new ObjectMapper();
-//		
-//		HttpHeaders httpHeaders = new HttpHeaders();
-//		httpHeaders.add("sats-marketid", marketCode);
-//		httpHeaders.add("sats-locale", locale);
-//		httpHeaders.add("sats-uuid", uuid);
-//		
-//		
-//		expectedResponse.setStatus(200);
-//		
-//		
-//		String jsonRestInput = mapper.writeValueAsString(restaurantInput);
-//		
-//		MockHttpServletResponse actualResponse = mockMvc.perform(post("/api/restaurants/ingest")
-//														.contentType(MediaType.APPLICATION_JSON)
-//														.headers(httpHeaders)
-//														.content(jsonRestInput))
-//														.andDo(print())
-//														.andReturn()
-//														.getResponse();
-//		
-//		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatus());
-//		
-//	}
+	@Test
+	void ingestRestaurant_Success() throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("sats-marketid", marketCode);
+		httpHeaders.add("sats-locale", locale);
+		httpHeaders.add("sats-uuid", uuid);
+		
+		
+		expectedResponse.setStatus(200);
+		
+		
+		String jsonRestInput = mapper.writeValueAsString(restaurantInput);
+		
+		MockHttpServletResponse actualResponse = mockMvc.perform(post("/api/restaurants/ingest")
+														.contentType(MediaType.APPLICATION_JSON)
+														.headers(httpHeaders)
+														.content(jsonRestInput))
+														.andDo(print())
+														.andReturn()
+														.getResponse();
+		
+		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatus());
+		
+	}
 	
 	@Test
-	void ingestRestaurant_Throw_HeaderValidationException() throws Exception {
+	void ingestRestaurant_Throw_MarketId_ValidationException() throws Exception {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("sats-marketid", "IND");
+		httpHeaders.add("sats-marketid", "WrongInput");
 		httpHeaders.add("sats-locale", locale);
 		httpHeaders.add("sats-uuid", uuid);
+		
+		Restaurant restaurant = RestaruantIngestObject();
+		String jsonString = mapper.writeValueAsString(restaurant);
+		
+		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
+		expectedResponse.setStatus(400);
+		
+		MockHttpServletResponse actualResponse = mockMvc.perform(post("/api/restaurants/ingest")
+				.contentType(MediaType.APPLICATION_JSON).headers(httpHeaders).content(jsonString)).andDo(print())
+				.andReturn().getResponse();
+		System.out.println("Actual Response is "+actualResponse);
+		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatus());
+		
+	}
+	
+	@Test
+	void ingestRestaurant_Throw_Locale_ValidationException() throws Exception {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("sats-marketid", marketCode);
+		httpHeaders.add("sats-locale", "WrongInput");
+		httpHeaders.add("sats-uuid", uuid);
+		
+		Restaurant restaurant = RestaruantIngestObject();
+		String jsonString = mapper.writeValueAsString(restaurant);
+		
+		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
+		expectedResponse.setStatus(400);
+		
+		MockHttpServletResponse actualResponse = mockMvc.perform(post("/api/restaurants/ingest")
+				.contentType(MediaType.APPLICATION_JSON).headers(httpHeaders).content(jsonString)).andDo(print())
+				.andReturn().getResponse();
+		System.out.println("Actual Response is "+actualResponse);
+		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatus());
+		
+	}
+	
+	@Test
+	void ingestRestaurant_Throw_UUID_ValidationException() throws Exception {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("sats-marketid", marketCode);
+		httpHeaders.add("sats-locale", locale);
+		httpHeaders.add("sats-uuid", "  ");
 		
 		Restaurant restaurant = RestaruantIngestObject();
 		String jsonString = mapper.writeValueAsString(restaurant);

@@ -111,7 +111,7 @@ class EsControllerTest {
 		httpHeaders.add("sats-uuid", uuid);
 		
 		
-		expectedResponse.setStatus(400);
+		expectedResponse.setStatus(200);
 		
 		Restaurant restaurant = RestaruantIngestObject();
 		ArrayList<Restaurant> responseList = new ArrayList<>();

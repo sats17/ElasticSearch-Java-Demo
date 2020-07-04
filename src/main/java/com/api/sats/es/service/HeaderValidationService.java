@@ -23,7 +23,7 @@ public class HeaderValidationService {
 			validateUuid(uuid);
 			validateLocale(locale);
 		} catch (RequestHeaderException exception) {
-			throw new HeaderValidationException(apiResponseUtility.missingRequestHeaderException(uuid));
+			throw new HeaderValidationException(apiResponseUtility.missingRequestHeaderException(uuid, exception.getMessage()));
 		}
 	}
 

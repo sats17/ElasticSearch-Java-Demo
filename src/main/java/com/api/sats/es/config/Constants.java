@@ -19,5 +19,11 @@ public class Constants {
 	
 	public static final int HEADER_VALIDATION_EXCEPTION_RESULT_CODE = 40001;
 	public static final String HEADER_VALIDATION_EXCEPTION_RESULT_TYPE = "HeaderValidationException";
-	public static final String HEADER_VALIDATION_EXCEPTION_RESULT_MESSAGE = "Headers validation error occurs, please check your request";
+	public static final String MARKET_CODE_EXCEPTION_RESULT_MESSAGE = "Headers validation error occurs, please check your market "
+			+ "code is correct or not";
+	public static final String LOCALE_EXCEPTION_RESULT_MESSAGE = "Headers validation error occurs, please check your locale "
+			+ "is correct or not";
+	public static final String UUID_EXCEPTION_RESULT_MESSAGE = "Headers validation error occurs, please check your uuid "
+			+ "is correct or not";
+
 }

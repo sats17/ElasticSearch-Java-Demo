@@ -39,7 +39,6 @@ public class RestaurantService {
 		Restaurant response = esService.insert(restaurant);
 		
 		return apiResponseUtility.ingestRestaurantSuccessResponse(response, uuid);
-//		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
 }

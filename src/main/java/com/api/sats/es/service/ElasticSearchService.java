@@ -31,7 +31,7 @@ public class ElasticSearchService {
 			return restaurantRepository.save(restaurant);
 		} catch (Exception exception) {
 			throw new ElasticSearchException(apiResponseUtility.applicationProcessingException());
-		}
+		} 
 	}
 
 }
