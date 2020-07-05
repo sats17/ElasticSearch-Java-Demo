@@ -1,8 +1,9 @@
 package com.api.sats.es.config;
 
-import org.springframework.web.HttpRequestMethodNotSupportedException;
-
-public class Constants {
+public class Constants { 
+	
+	public static final String BASE_API_PATH = "/api/restaurants";
+	public static final String RESTAURANT_INGEST_PATH = "/ingest";
 
 	public static final int SUCCESS_ROOT_CODE = 20000;
 	public static final String SUCCESS_ROOT_TYPE = "success";

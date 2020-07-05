@@ -1,5 +1,8 @@
 package com.api.sats.es.error.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorDetails {
 
 	private int resultCode;

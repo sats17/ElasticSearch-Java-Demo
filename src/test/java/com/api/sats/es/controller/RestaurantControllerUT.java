@@ -4,23 +4,16 @@ import static com.api.sats.es.config.Constants.INGEST_RESTAURANT_SUCCESS_MESSAGE
 import static com.api.sats.es.config.Constants.SUCCESS_ROOT_CODE;
 import static com.api.sats.es.config.Constants.SUCCESS_ROOT_TYPE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,85 +52,72 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest
 //@ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.WARN)
-class EsControllerTest {
-	
-	
+class RestaurantControllerUT {
+
 	private MockMvc mockMvc;
-	
+
 	@Autowired
 	ApplicationContext context;
-	
-	
+
 	@Mock
 	private RestaurantService restService;
-	
+
 	@Autowired
-    private WebApplicationContext wac;
-	
+	private WebApplicationContext wac;
+
 	@Mock
 	private ElasticSearchService esService;
-	
+
 	@InjectMocks
 	private RestaurantController restController;
-	
+
 	@Mock
 	private HeaderValidationService headerValidationService;
-	
+
 	@Mock
 	private RestaurantSearchRepository restSearchRepo;
-	
+
 	MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
-	
+
 	private static final String marketCode = "US";
 	private static final String locale = "en-US";
 	private static final String uuid = "12345";
-	private static final Status INGEST_RESTAURANT_SUCCESS = new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, 
+	private static final Status INGEST_RESTAURANT_SUCCESS = new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE,
 			INGEST_RESTAURANT_SUCCESS_MESSAGE);
 
+	HttpHeaders httpHeaders = new HttpHeaders();
+
 	@BeforeEach
-    void setup() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(restController).build();
-    }
+	void setup() {
+		this.mockMvc = MockMvcBuilders.standaloneSetup(restController).build();
+	}
 
 	@Test
-	void ingestRestaurant_Success() throws Exception { 
-		
-		
+	void ingestRestaurant_Success() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		
-		HttpHeaders httpHeaders = new HttpHeaders();
+
 		httpHeaders.add("sats-marketid", marketCode);
 		httpHeaders.add("sats-locale", locale);
 		httpHeaders.add("sats-uuid", uuid);
-		
-		
+
 		expectedResponse.setStatus(200);
-		
+
 		Restaurant restaurant = RestaruantIngestObject();
 		ArrayList<Restaurant> responseList = new ArrayList<>();
 		responseList.add(RestaruantReturnObject());
 		String jsonString = mapper.writeValueAsString(restaurant);
-		
-		ResponseEntity<Object> ret = new ResponseEntity<Object>(restaurant,HttpStatus.BAD_REQUEST);
-		
-//		when(headerValidationService.validateIngestRestaurantHeaders(marketCode, locale, uuid)).th;
-		
+
+		ResponseEntity<Object> ret = new ResponseEntity<Object>(restaurant, HttpStatus.BAD_REQUEST);
+
 		when(restService.ingestRestaurant(marketCode, locale, uuid, restaurant))
-						.thenReturn(new ResponseEntity<Object>(HttpStatus.BAD_GATEWAY));
-		
-		
-		MockHttpServletResponse actualResponse = mockMvc.perform(post("/api/restaurants/ingest")
-									  .contentType(MediaType.APPLICATION_JSON)
-									  .headers(httpHeaders)
-									  .content(jsonString))
-									  .andDo(print())
-									  .andReturn().getResponse();
-		
-		System.out.println(context.toString());
-		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatus());
+				.thenReturn(new ResponseEntity<Object>(HttpStatus.OK));
+
+		ResponseEntity<Object> actualResponse = restController.ingestRestaurant(marketCode, locale, uuid, restaurant);
+
+		System.out.println(actualResponse.getStatusCodeValue());
+		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatusCodeValue());
 	}
-	
-	
+
 //	@Test
 //	void ingestRestaurant_Throw_HeaderValidationException() throws Exception {
 //	
@@ -169,7 +149,7 @@ class EsControllerTest {
 ////	assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatus());
 //	
 //}
-	
+
 	Restaurant RestaruantIngestObject() {
 		Restaurant restaurant = new Restaurant();
 //		restaurant.setId("195500273006:en-US");
@@ -184,10 +164,10 @@ class EsControllerTest {
 		restaurant.setCurrentStatus(new CurrentStatus("OPEN", "26-02-2019", "15-02-2025"));
 		restaurant.setLocation(new Location(39.200516, -94.499097));
 		restaurant.setStoreType(new StoreType("FREESTANDING", "partyHere"));
-		
-		return restaurant;	
+
+		return restaurant;
 	}
-	
+
 	Restaurant RestaruantReturnObject() {
 		Restaurant restaurant = new Restaurant();
 		restaurant.setId("195500273006:en-US");
@@ -202,15 +182,15 @@ class EsControllerTest {
 		restaurant.setCurrentStatus(new CurrentStatus("OPEN", "26-02-2019", "15-02-2025"));
 		restaurant.setLocation(new Location(39.200516, -94.499097));
 		restaurant.setStoreType(new StoreType("FREESTANDING", "partyHere"));
-		
-		return restaurant;	
+
+		return restaurant;
 	}
-	
+
 	private HttpHeaders getHttpHeaders(String uuid) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("sats-uuid", uuid);
 		return headers;
-		
+
 	}
 
 }

@@ -8,14 +8,15 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.sats.es.exception.ElasticSearchException;
-import com.api.sats.es.exception.HeaderValidationException;
 import com.api.sats.es.model.Restaurant;
 import com.api.sats.es.service.HeaderValidationService;
 import com.api.sats.es.service.RestaurantService;
 
+import static com.api.sats.es.config.Constants.BASE_API_PATH;
+import static com.api.sats.es.config.Constants.RESTAURANT_INGEST_PATH;
+
 @RestController
-@RequestMapping("/api/restaurants")
+@RequestMapping(BASE_API_PATH)
 public class RestaurantController {
 
 	@Autowired
@@ -24,12 +25,12 @@ public class RestaurantController {
 	@Autowired
 	private HeaderValidationService headerValidationService;
 
-	@PostMapping("/ingest")
+	@PostMapping(RESTAURANT_INGEST_PATH)
 	public ResponseEntity<Object> ingestRestaurant(
 			@RequestHeader(value = "sats-marketid", required = true) String marketCode,
 			@RequestHeader(value = "sats-locale", required = true) String locale,
-			@RequestHeader(value = "sats-uuid", required = true) String uuid, @RequestBody Restaurant restaurant)
-			throws Exception {
+			@RequestHeader(value = "sats-uuid", required = true) String uuid,
+			@RequestBody Restaurant restaurant) throws Exception { 
 		headerValidationService.validateIngestRestaurantHeaders(marketCode, locale, uuid);
 		return restService.ingestRestaurant(marketCode, locale, uuid, restaurant);
 	} 
