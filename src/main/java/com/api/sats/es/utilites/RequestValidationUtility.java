@@ -20,7 +20,7 @@ public class RequestValidationUtility {
 	public static void validateLocale(String locale) throws RequestHeaderException {
 		if(locale.isBlank() || locale == null || !isLocaleContains(locale)) {
 			throw new RequestHeaderException(LOCALE_EXCEPTION_RESULT_MESSAGE);
-		}
+		} 
 	}
 	
 	public static void validateUuid(String uuid) throws RequestHeaderException {

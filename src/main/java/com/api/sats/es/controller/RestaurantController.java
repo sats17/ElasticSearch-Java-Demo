@@ -37,7 +37,7 @@ public class RestaurantController {
 		} catch (HeaderValidationException exception) {
 			return exception.getResponse();
 		} catch (ElasticSearchException exception) {
-			return exception.getResponse();
+			return exception.getResponse(); 
 		} 
 		
 	}

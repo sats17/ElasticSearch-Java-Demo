@@ -13,10 +13,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StoreType {
 	
-	@JsonProperty("storeTypeCode")
+	@JsonProperty("storeTypeCode") 
 	private String storeTypeCode;
 	@JsonProperty("partyName")
-	private String partyName;
+	private String partyName; 
 	
 	public StoreType() {}
 	

@@ -4,6 +4,7 @@
 package com.api.sats.es.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,8 @@ import com.api.sats.es.exception.ElasticSearchException;
 import com.api.sats.es.exception.InternalServerException;
 import com.api.sats.es.model.Restaurant;
 import com.api.sats.es.utilites.ApiResponeUtility;
+
+import static com.api.sats.es.config.Constants.ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE;
 
 /**
  * @author satikumb
@@ -29,8 +32,8 @@ public class ElasticSearchService {
 	public Restaurant insert(Restaurant restaurant) throws ElasticSearchException {
 		try {
 			return restaurantRepository.save(restaurant);
-		} catch (Exception exception) {
-			throw new ElasticSearchException(apiResponseUtility.applicationProcessingException());
+		} catch (Exception exception) { 
+			throw new ElasticSearchException(apiResponseUtility.applicationProcessingException(ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE));
 		} 
 	}
 

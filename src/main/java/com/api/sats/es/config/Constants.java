@@ -11,8 +11,8 @@ public class Constants {
 	
 	public static final int ELASTIC_SEARCH_EXCEPTION_RESULT_CODE = 50001;
 	public static final String ELASTIC_SEARCH_EXCEPTION_RESULT_TYPE = "ElasticSearchException";
-	public static final String ELASTIC_SEARCH_EXCEPTION_MESSAGE = "Elastic search exception occured during request, "
-																	+ " please check your request or whether ES is up and running";
+	public static final String ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE = "Exception occured during inserting record in ElasticSearch, "
+			+ "please check your ElasticSearch Cluster is up and running";
 	
 	public static final int HEADER_VALIDATION_EXCEPTION_ROOT_CODE = 40000;
 	public static final String HEADER_VALIDATION_EXCEPTION_ROOT_TYPE = "ValidationException";

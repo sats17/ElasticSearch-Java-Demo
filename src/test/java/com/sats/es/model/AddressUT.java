@@ -152,7 +152,7 @@ public class AddressUT {
 	}
 	
 	@Test
-	public void test_hash_code_of_null_region() {
+	public void test_hash_code_of_null_region() { 
 		Address obj3 = new Address("India", "StateProvince", 1234, "Town", "Line", null);
 		int hashcode = obj3.hashCode();
 		assertEquals(obj3.hashCode(), hashcode);

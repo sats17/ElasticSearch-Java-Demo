@@ -1,69 +1,32 @@
 package com.api.sats.es.controller;
 
-import static com.api.sats.es.config.Constants.INGEST_RESTAURANT_SUCCESS_MESSAGE;
-import static com.api.sats.es.config.Constants.SUCCESS_ROOT_CODE;
-import static com.api.sats.es.config.Constants.SUCCESS_ROOT_TYPE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.isA;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-
-import com.api.sats.es.data.RestaurantSearchRepository;
-import com.api.sats.es.exception.HeaderValidationException;
 import com.api.sats.es.model.Address;
 import com.api.sats.es.model.CurrentStatus;
 import com.api.sats.es.model.GeneralStatus;
 import com.api.sats.es.model.Location;
 import com.api.sats.es.model.Restaurant;
 import com.api.sats.es.model.StoreType;
-import com.api.sats.es.service.HeaderValidationService;
-import com.api.sats.es.service.RestaurantService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @AutoConfigureMockMvc
-//@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class RestaurantControllerIT {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
-//	@Mock
-//	private RestaurantSearchRepository restaurantRepository;
-	
-	@Autowired
-    private WebApplicationContext wac;
-	
-//	@InjectMocks
-	private RestaurantController restController;
 	
 	private static final String marketCode = "US";
 	private static final String locale = "en-US";
@@ -76,7 +39,6 @@ public class RestaurantControllerIT {
 	@BeforeEach
 	void setUp() {
 		restaurantInput = RestaruantIngestObject();
-//		this.mockMvc = MockMvcBuilders.standaloneSetup(restController).build();
 	}
 	
 	
@@ -118,7 +80,7 @@ public class RestaurantControllerIT {
 		httpHeaders.add("sats-uuid", uuid);
 		
 		Restaurant restaurant = RestaruantIngestObject();
-		String jsonString = mapper.writeValueAsString(restaurant);
+		String jsonString = mapper.writeValueAsString(restaurant); 
 		
 		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
 		expectedResponse.setStatus(400);

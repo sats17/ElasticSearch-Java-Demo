@@ -99,7 +99,7 @@ public class Restaurant {
 	}
 
 	public String getLocalization() {
-		return localization;
+		return localization; 
 	}
 
 	public void setLocalization(String localization) {
