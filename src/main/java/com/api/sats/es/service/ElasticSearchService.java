@@ -32,7 +32,7 @@ public class ElasticSearchService {
 	public Restaurant insert(Restaurant restaurant) throws ElasticSearchException {
 		try {
 			return restaurantRepository.save(restaurant);
-		} catch (Exception exception) { 
+		} catch (Exception exception) {
 			throw new ElasticSearchException(apiResponseUtility.applicationProcessingException(ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE));
 		} 
 	}

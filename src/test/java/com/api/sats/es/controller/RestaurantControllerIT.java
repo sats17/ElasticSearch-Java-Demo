@@ -1,6 +1,7 @@
 package com.api.sats.es.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -134,6 +135,30 @@ public class RestaurantControllerIT {
 		expectedResponse.setStatus(400);
 		
 		MockHttpServletResponse actualResponse = mockMvc.perform(post("/api/restaurants/ingest")
+				.contentType(MediaType.APPLICATION_JSON).headers(httpHeaders).content(jsonString)).andDo(print())
+				.andReturn().getResponse();
+		System.out.println("Actual Response is "+actualResponse);
+		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatus());
+		
+	}
+	
+	@Test
+	void ingestRestaurant_Throw_MethodNotAllowedException() throws Exception {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("sats-marketid", "WrongInput");
+		httpHeaders.add("sats-locale", locale);
+		httpHeaders.add("sats-uuid", uuid);
+		
+		Restaurant restaurant = RestaruantIngestObject();
+		String jsonString = mapper.writeValueAsString(restaurant); 
+		
+		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
+		expectedResponse.setStatus(405);
+		
+		MockHttpServletResponse actualResponse = mockMvc.perform(get("/api/restaurants/ingest")
 				.contentType(MediaType.APPLICATION_JSON).headers(httpHeaders).content(jsonString)).andDo(print())
 				.andReturn().getResponse();
 		System.out.println("Actual Response is "+actualResponse);

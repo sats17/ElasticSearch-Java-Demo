@@ -20,7 +20,7 @@ public class RestaurantController {
 
 	@Autowired
 	private RestaurantService restService;
-	
+
 	@Autowired
 	private HeaderValidationService headerValidationService;
 
@@ -28,18 +28,10 @@ public class RestaurantController {
 	public ResponseEntity<Object> ingestRestaurant(
 			@RequestHeader(value = "sats-marketid", required = true) String marketCode,
 			@RequestHeader(value = "sats-locale", required = true) String locale,
-			@RequestHeader(value = "sats-uuid", required = true) String uuid,
-			@RequestBody Restaurant restaurant) {
-		
-		try {
-			headerValidationService.validateIngestRestaurantHeaders(marketCode, locale, uuid);
-			return restService.ingestRestaurant(marketCode, locale, uuid, restaurant);
-		} catch (HeaderValidationException exception) {
-			return exception.getResponse();
-		} catch (ElasticSearchException exception) {
-			return exception.getResponse(); 
-		} 
-		
-	}
+			@RequestHeader(value = "sats-uuid", required = true) String uuid, @RequestBody Restaurant restaurant)
+			throws Exception {
+		headerValidationService.validateIngestRestaurantHeaders(marketCode, locale, uuid);
+		return restService.ingestRestaurant(marketCode, locale, uuid, restaurant);
+	} 
 
 }
