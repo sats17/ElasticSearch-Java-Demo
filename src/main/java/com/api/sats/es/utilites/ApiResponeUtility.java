@@ -6,11 +6,11 @@ package com.api.sats.es.utilites;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.api.sats.es.error.response.ErrorDetails;
+import com.api.sats.es.error.response.ErrorResponse;
+import com.api.sats.es.error.response.ErrorStatus;
 import com.api.sats.es.exception.HeaderValidationException;
 import com.api.sats.es.model.Restaurant;
-import com.api.sats.es.response.ErrorDetails;
-import com.api.sats.es.response.ErrorResponse;
-import com.api.sats.es.response.ErrorStatus;
 import com.api.sats.es.response.FinalResponse;
 import com.api.sats.es.response.Status;
 import org.springframework.http.HttpHeaders;
@@ -63,11 +63,25 @@ public class ApiResponeUtility {
 		return new ResponseEntity<Object>(HeaderValidationExceptionCreator(Message), getHttpHeaders(uuid),
 				HttpStatus.BAD_REQUEST);
 	}
+	
+	private static final ErrorResponse RequestNotValidExceptionCreator(String method, String requestURI) {
+		return new ErrorResponse(
+				new ErrorStatus(REQUEST_NOT_VALID_EXCEPTION_ROOT_CODE, REQUEST_NOT_VALID_EXCEPTION_ROOT_TYPE, 
+						Collections.singletonList(new ErrorDetails(METHOD_NOT_VALID_EXCEPTION_RESULT_CODE,
+								METHOD_NOT_VALID_EXCEPTION_RESULT_TYPE,method,requestURI,METHOD_NOT_VALID_EXCEPTION_RESULT_MESSAGE)))); 
+				
+	}
+	
+	public ResponseEntity<Object> requestNotValidException(String method, String requestURI) {
+		return new ResponseEntity<Object>(RequestNotValidExceptionCreator(method, requestURI),HttpStatus.METHOD_NOT_ALLOWED);
+	}
 
 	private HttpHeaders getHttpHeaders(String uuid) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("sats-uuid", uuid);
 		return headers;
 	}
+
+	
 
 }

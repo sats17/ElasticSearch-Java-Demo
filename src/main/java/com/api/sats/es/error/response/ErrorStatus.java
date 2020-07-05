@@ -1,4 +1,4 @@
-package com.api.sats.es.response;
+package com.api.sats.es.error.response;
 
 import java.util.List;
 

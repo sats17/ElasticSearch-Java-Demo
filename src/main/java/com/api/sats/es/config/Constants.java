@@ -1,5 +1,7 @@
 package com.api.sats.es.config;
 
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+
 public class Constants {
 
 	public static final int SUCCESS_ROOT_CODE = 20000;
@@ -26,4 +28,11 @@ public class Constants {
 	public static final String UUID_EXCEPTION_RESULT_MESSAGE = "Headers validation error occurs, please check your uuid "
 			+ "is correct or not";
 
+	public static final int REQUEST_NOT_VALID_EXCEPTION_ROOT_CODE = 40400;
+	public static final String REQUEST_NOT_VALID_EXCEPTION_ROOT_TYPE = "InvalidRequestException";
+	
+	public static final int METHOD_NOT_VALID_EXCEPTION_RESULT_CODE = 40401;
+	public static final String METHOD_NOT_VALID_EXCEPTION_RESULT_TYPE = "HttpRequestMethodNotSupportedException";
+	public static final String METHOD_NOT_VALID_EXCEPTION_RESULT_MESSAGE = "Given HTTP method does not support by requested url";
+	
 }

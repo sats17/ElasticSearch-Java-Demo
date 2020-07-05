@@ -17,7 +17,7 @@ import com.api.sats.es.utilites.ApiResponeUtility;
  *
  */
 @Service
-public class RestaurantService {
+public class RestaurantService { 
 	
 	@Autowired
 	private ElasticSearchService esService;

@@ -164,7 +164,7 @@ public class RestaurantControllerIT {
 		System.out.println("Actual Response is "+actualResponse);
 		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatus());
 		
-	}
+	} 
 	
 	Restaurant RestaruantIngestObject() {
 		Restaurant restaurant = new Restaurant();

@@ -6,7 +6,11 @@ import org.springframework.web.context.request.WebRequest;
 
 import com.api.sats.es.exception.ElasticSearchException;
 import com.api.sats.es.exception.HeaderValidationException;
+import com.api.sats.es.utilites.ApiResponeUtility;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -14,14 +18,18 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
+	@Autowired
+	private ApiResponeUtility apiResponseUtility;
+	
 	@ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
-	public ResponseEntity<Object> methodNotSupportedException(HttpRequestMethodNotSupportedException methodNotSupportedException, WebRequest request) {
-		return new ResponseEntity<Object>("Method not supported",HttpStatus.METHOD_NOT_ALLOWED);
+	public ResponseEntity<Object> methodNotSupportedException(HttpRequestMethodNotSupportedException methodNotSupportedException, 
+			 HttpServletRequest httpRequest) {
+		return apiResponseUtility.requestNotValidException(httpRequest.getMethod(),httpRequest.getRequestURI());
 	}
 	
 	@ExceptionHandler(value = ElasticSearchException.class)
 	public ResponseEntity<Object> elasticSearchException(ElasticSearchException elasticSearchException) {
-		return elasticSearchException.getResponse();
+		return elasticSearchException.getResponse(); 
 	}
 	
 	@ExceptionHandler(value = HeaderValidationException.class)
