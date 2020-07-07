@@ -1,24 +1,17 @@
-/**
- * 
- */
 package com.api.sats.es.exception;
 
 import org.springframework.http.ResponseEntity;
 
-/**
- * @author satikumb
- *
- */
-public class ElasticSearchException extends Exception {
+public class InternalServerException extends Exception {
 
 	private ResponseEntity<Object> response;
 	
-	public ElasticSearchException() {
+	public InternalServerException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ElasticSearchException(ResponseEntity<Object> response) {
+	public InternalServerException(ResponseEntity<Object> response) {
 		this.response = response;
 		// TODO Auto-generated constructor stub
 	}
@@ -26,5 +19,7 @@ public class ElasticSearchException extends Exception {
 	public ResponseEntity<Object> getResponse() {
 		return this.response;
 	}
-
+	
+	
+	
 }

@@ -3,12 +3,14 @@
  */
 package com.api.sats.es.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author satikumb
  *
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Address {
 	
 	@JsonProperty("country")
@@ -29,6 +31,7 @@ public class Address {
 	@JsonProperty("region")
 	private String region;
 	
+	public Address() {}
 
 	public Address(String country, String stateProvince, Integer postalZip, String cityTown, String addressLine,
 			String region) {
