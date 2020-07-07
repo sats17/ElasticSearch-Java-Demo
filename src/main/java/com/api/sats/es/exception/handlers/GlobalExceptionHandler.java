@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(value = ElasticSearchException.class)
 	public ResponseEntity<Object> elasticSearchException(ElasticSearchException elasticSearchException) {
-		return elasticSearchException.getResponse(); 
+		return elasticSearchException.getResponse();
 	}
 	
 	@ExceptionHandler(value = HeaderValidationException.class)

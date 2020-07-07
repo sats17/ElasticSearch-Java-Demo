@@ -178,5 +178,98 @@ public class Restaurant {
 				+ generalStatus + ", currentStatus=" + currentStatus + ", location=" + location + ", storeType="
 				+ storeType + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((countryCode == null) ? 0 : countryCode.hashCode());
+		result = prime * result + ((currentStatus == null) ? 0 : currentStatus.hashCode());
+		result = prime * result + ((gblNumber == null) ? 0 : gblNumber.hashCode());
+		result = prime * result + ((generalStatus == null) ? 0 : generalStatus.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((localization == null) ? 0 : localization.hashCode());
+		result = prime * result + ((location == null) ? 0 : location.hashCode());
+		result = prime * result + ((marketCode == null) ? 0 : marketCode.hashCode());
+		result = prime * result + ((nationalStoreNumber == null) ? 0 : nationalStoreNumber.hashCode());
+		result = prime * result + ((storeIdentifierType == null) ? 0 : storeIdentifierType.hashCode());
+		result = prime * result + ((storeType == null) ? 0 : storeType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Restaurant other = (Restaurant) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (countryCode == null) {
+			if (other.countryCode != null)
+				return false;
+		} else if (!countryCode.equals(other.countryCode))
+			return false;
+		if (currentStatus == null) {
+			if (other.currentStatus != null)
+				return false;
+		} else if (!currentStatus.equals(other.currentStatus))
+			return false;
+		if (gblNumber == null) {
+			if (other.gblNumber != null)
+				return false;
+		} else if (!gblNumber.equals(other.gblNumber))
+			return false;
+		if (generalStatus == null) {
+			if (other.generalStatus != null)
+				return false;
+		} else if (!generalStatus.equals(other.generalStatus))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (localization == null) {
+			if (other.localization != null)
+				return false;
+		} else if (!localization.equals(other.localization))
+			return false;
+		if (location == null) {
+			if (other.location != null)
+				return false;
+		} else if (!location.equals(other.location))
+			return false;
+		if (marketCode == null) {
+			if (other.marketCode != null)
+				return false;
+		} else if (!marketCode.equals(other.marketCode))
+			return false;
+		if (nationalStoreNumber == null) {
+			if (other.nationalStoreNumber != null)
+				return false;
+		} else if (!nationalStoreNumber.equals(other.nationalStoreNumber))
+			return false;
+		if (storeIdentifierType == null) {
+			if (other.storeIdentifierType != null)
+				return false;
+		} else if (!storeIdentifierType.equals(other.storeIdentifierType))
+			return false;
+		if (storeType == null) {
+			if (other.storeType != null)
+				return false;
+		} else if (!storeType.equals(other.storeType))
+			return false;
+		return true;
+	}
+	
+	
 	
 }

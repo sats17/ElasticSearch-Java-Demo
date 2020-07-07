@@ -4,6 +4,9 @@ import static com.api.sats.es.config.Constants.INGEST_RESTAURANT_SUCCESS_MESSAGE
 import static com.api.sats.es.config.Constants.SUCCESS_ROOT_CODE;
 import static com.api.sats.es.config.Constants.SUCCESS_ROOT_TYPE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -35,6 +38,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.util.NestedServletException;
 
 import com.api.sats.es.data.RestaurantSearchRepository;
+import com.api.sats.es.exception.ElasticSearchException;
 import com.api.sats.es.exception.HeaderValidationException;
 import com.api.sats.es.model.Address;
 import com.api.sats.es.model.CurrentStatus;
@@ -53,9 +57,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 //@ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.WARN)
 class RestaurantControllerUT {
-
-	private MockMvc mockMvc;
-
+	
 	@Autowired
 	ApplicationContext context;
 
@@ -89,66 +91,103 @@ class RestaurantControllerUT {
 
 	@BeforeEach
 	void setup() {
-		this.mockMvc = MockMvcBuilders.standaloneSetup(restController).build();
+//		this.mockMvc = MockMvcBuilders.standaloneSetup(restController).build();
 	}
 
 	@Test
 	void ingestRestaurant_Success() throws Exception {
-		ObjectMapper mapper = new ObjectMapper();
-
-		httpHeaders.add("sats-marketid", marketCode);
-		httpHeaders.add("sats-locale", locale);
-		httpHeaders.add("sats-uuid", uuid);
 
 		expectedResponse.setStatus(200);
 
 		Restaurant restaurant = RestaruantIngestObject();
 		ArrayList<Restaurant> responseList = new ArrayList<>();
-		responseList.add(RestaruantReturnObject());
-		String jsonString = mapper.writeValueAsString(restaurant);
-
-		ResponseEntity<Object> ret = new ResponseEntity<Object>(restaurant, HttpStatus.BAD_REQUEST);
+		responseList.add(RestaruantReturnObject()); 
 
 		when(restService.ingestRestaurant(marketCode, locale, uuid, restaurant))
 				.thenReturn(new ResponseEntity<Object>(HttpStatus.OK));
 
 		ResponseEntity<Object> actualResponse = restController.ingestRestaurant(marketCode, locale, uuid, restaurant);
 
-		System.out.println(actualResponse.getStatusCodeValue());
 		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatusCodeValue());
+		verify(restService).ingestRestaurant(marketCode, locale, uuid, restaurant);
 	}
 
-//	@Test
-//	void ingestRestaurant_Throw_HeaderValidationException() throws Exception {
-//	
-//	ObjectMapper mapper = new ObjectMapper();
-//	
-//	HttpHeaders httpHeaders = new HttpHeaders();
-//	httpHeaders.add("sats-marketid", "IND");
-//	httpHeaders.add("sats-locale", locale);
-//	httpHeaders.add("sats-uuid", uuid);
-//	
-//	Restaurant restaurant = RestaruantIngestObject();
-//	String jsonString = mapper.writeValueAsString(restaurant);
-//	
-//	MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
-//	expectedResponse.setStatus(400);
-//	
-//	doThrow(HeaderValidationException.class).when(headerValidationService)
-//											.validateIngestRestaurantHeaders(marketCode, locale, uuid);
-//	MockHttpServletResponse actualResponse = mockMvc.perform(post("/api/restaurants/ingest")
-//													.contentType(MediaType.APPLICATION_JSON)
-//													.headers(httpHeaders)
-//													.content(jsonString))
-//													.andDo(print())
-//													.andReturn()
-//													.getResponse();
-//	
-//	assertThrows(NestedServletException.class, ()-> mockMvc.perform(post("/api/restaurants/ingest")));
-//	
-////	assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatus());
-//	
-//}
+	@Test
+	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_marketid() throws HeaderValidationException {
+
+
+		Restaurant restaurant = RestaruantIngestObject();
+
+		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
+		expectedResponse.setStatus(400);
+		
+		doThrow(new HeaderValidationException()).when(headerValidationService)
+									   .validateIngestRestaurantHeaders("invalid", locale, uuid);
+		
+		assertThrows(HeaderValidationException.class, () -> {
+			restController.ingestRestaurant("invalid", locale, uuid, restaurant);
+		});
+		
+		verify(headerValidationService).validateIngestRestaurantHeaders("invalid", locale, uuid);
+
+	}
+	
+	@Test
+	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_locale() throws HeaderValidationException {
+
+		Restaurant restaurant = RestaruantIngestObject();
+
+		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
+		expectedResponse.setStatus(400);
+		
+		doThrow(new HeaderValidationException()).when(headerValidationService)
+									   .validateIngestRestaurantHeaders(marketCode, "invalid", uuid);
+		
+		assertThrows(HeaderValidationException.class, () -> {
+			restController.ingestRestaurant(marketCode, "invalid", uuid, restaurant);
+		});
+		
+		verify(headerValidationService).validateIngestRestaurantHeaders(marketCode, "invalid", uuid);
+
+	}
+	
+	@Test
+	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_uuid() throws HeaderValidationException {
+
+		Restaurant restaurant = RestaruantIngestObject();
+
+		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
+		expectedResponse.setStatus(400);
+		
+		doThrow(new HeaderValidationException()).when(headerValidationService)
+									   .validateIngestRestaurantHeaders(marketCode, locale, "invalid");
+		
+		assertThrows(HeaderValidationException.class, () -> {
+			restController.ingestRestaurant(marketCode, locale, "invalid", restaurant);
+		});
+		
+		verify(headerValidationService).validateIngestRestaurantHeaders(marketCode, locale, "invalid");
+
+	}
+	
+	@Test
+	void ingestRestaurant_Throw_ElasticSearchException() throws ElasticSearchException {
+
+		Restaurant restaurant = RestaruantIngestObject();
+
+		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
+		expectedResponse.setStatus(400);
+		
+		doThrow(new ElasticSearchException()).when(restService)
+												.ingestRestaurant(marketCode, locale, uuid, restaurant);
+		
+		assertThrows(ElasticSearchException.class, () -> {
+			restController.ingestRestaurant(marketCode, locale, uuid, restaurant);
+		});
+		
+		verify(restService).ingestRestaurant(marketCode, locale, uuid, restaurant);
+
+	}
 
 	Restaurant RestaruantIngestObject() {
 		Restaurant restaurant = new Restaurant();
@@ -186,11 +225,5 @@ class RestaurantControllerUT {
 		return restaurant;
 	}
 
-	private HttpHeaders getHttpHeaders(String uuid) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("sats-uuid", uuid);
-		return headers;
-
-	}
 
 }

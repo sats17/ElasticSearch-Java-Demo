@@ -42,7 +42,6 @@ public class RestaurantControllerIT {
 		restaurantInput = RestaruantIngestObject();
 	}
 	
-	
 	@Test
 	void ingestRestaurant_Success() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
