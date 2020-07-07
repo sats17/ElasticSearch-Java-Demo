@@ -3,12 +3,14 @@
  */
 package com.api.sats.es.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author satikumb
  *
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CurrentStatus {
 
 	@JsonProperty("status")
@@ -17,6 +19,8 @@ public class CurrentStatus {
     private String startDate;
     @JsonProperty("endDate")
     private String endDate;
+    
+    public CurrentStatus() {}
     
     
 	public CurrentStatus(String status, String startDate, String endDate) {
