@@ -56,7 +56,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest
 //@ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.WARN)
-class RestaurantControllerUT {
+class RestaurantControllerUnitTest {
 	
 	@Autowired
 	ApplicationContext context;

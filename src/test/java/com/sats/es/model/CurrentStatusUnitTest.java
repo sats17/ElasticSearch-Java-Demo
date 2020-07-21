@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.api.sats.es.model.CurrentStatus;
 
-public class CurrentStatusUT {
+public class CurrentStatusUnitTest {
 
 	CurrentStatus obj1; 
 	CurrentStatus obj2;

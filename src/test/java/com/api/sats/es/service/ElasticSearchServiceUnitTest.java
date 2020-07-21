@@ -20,12 +20,12 @@ import com.api.sats.es.exception.ElasticSearchException;
 import com.api.sats.es.exception.HeaderValidationException;
 import com.api.sats.es.model.Restaurant;
 
-import static com.api.sats.es.utilities.TestUtility.RestaruantReturnObject;
+import static com.api.sats.es.utilities.UtilityUnitTest.RestaruantReturnObject;
 
 @SpringBootTest
 //@ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.WARN)
-public class ElasticSearchServiceUT {
+public class ElasticSearchServiceUnitTest {
 
 	@Autowired
 	ApplicationContext context;

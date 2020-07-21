@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.api.sats.es.model.GeneralStatus;
 
-public class GeneralStatusUT {
+public class GeneralStatusUnitTest {
 
 	GeneralStatus obj1; 
 	GeneralStatus obj2;
