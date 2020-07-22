@@ -14,7 +14,7 @@ import com.api.sats.es.utilites.ApiResponeUtility;
 @SpringBootTest
 //@ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.WARN)
-public class HeaderValidationServiceUT {
+public class HeaderValidationServiceUnitTest {
 
 	@InjectMocks
 	private HeaderValidationService headerValidationService;

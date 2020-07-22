@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.api.sats.es.model.StoreType;
 
-public class StoreTypeUT {
+public class StoreTypeUnitTest {
 
 	StoreType obj1; 
 	StoreType obj2;
