@@ -5,6 +5,7 @@ package com.api.sats.es.model;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Restaurant {
 	
 	@JsonProperty("id")
+	@JsonIgnore
 	private String id;
 	
 	@JsonProperty("nationalStoreNumber")
@@ -26,6 +28,7 @@ public class Restaurant {
 	private String storeIdentifierType;
 	
 	@JsonProperty("localization")
+	@JsonIgnore
 	private String 	localization;
 	
 	@JsonProperty("gblNumber")
@@ -35,6 +38,7 @@ public class Restaurant {
 	private String countryCode;
 	
 	@JsonProperty("marketCode")
+	@JsonIgnore
 	private String marketCode;
 	
 	@JsonProperty("address")

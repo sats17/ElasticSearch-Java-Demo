@@ -50,6 +50,8 @@ import com.api.sats.es.response.Status;
 import com.api.sats.es.service.ElasticSearchService;
 import com.api.sats.es.service.HeaderValidationService;
 import com.api.sats.es.service.RestaurantService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @AutoConfigureMockMvc
@@ -88,28 +90,32 @@ class RestaurantControllerUnitTest {
 			INGEST_RESTAURANT_SUCCESS_MESSAGE);
 
 	HttpHeaders httpHeaders = new HttpHeaders();
+	ObjectMapper mapper = new ObjectMapper();
+	Restaurant restaurant = RestaruantIngestObject();
+	String jsonBody;
 
 	@BeforeEach
-	void setup() {
+	void setup() throws JsonProcessingException {
 //		this.mockMvc = MockMvcBuilders.standaloneSetup(restController).build();
+		jsonBody = mapper.writeValueAsString(restaurant);
 	}
 
 	@Test
 	void ingestRestaurant_Success() throws Exception {
-
+		
 		expectedResponse.setStatus(200);
 
-		Restaurant restaurant = RestaruantIngestObject();
+		
 		ArrayList<Restaurant> responseList = new ArrayList<>();
 		responseList.add(RestaruantReturnObject()); 
 
-		when(restService.ingestRestaurant(marketCode, locale, uuid, restaurant))
+		when(restService.ingestRestaurant(marketCode, locale, uuid, jsonBody))
 				.thenReturn(new ResponseEntity<Object>(HttpStatus.OK));
 
-		ResponseEntity<Object> actualResponse = restController.ingestRestaurant(marketCode, locale, uuid, restaurant);
+		ResponseEntity<Object> actualResponse = restController.ingestRestaurant(marketCode, locale, uuid, jsonBody);
 
 		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatusCodeValue());
-		verify(restService).ingestRestaurant(marketCode, locale, uuid, restaurant);
+		verify(restService).ingestRestaurant(marketCode, locale, uuid, jsonBody);
 	}
 
 	@Test
@@ -125,7 +131,7 @@ class RestaurantControllerUnitTest {
 									   .validateIngestRestaurantHeaders("invalid", locale, uuid);
 		
 		assertThrows(HeaderValidationException.class, () -> {
-			restController.ingestRestaurant("invalid", locale, uuid, restaurant);
+			restController.ingestRestaurant("invalid", locale, uuid, jsonBody);
 		});
 		
 		verify(headerValidationService).validateIngestRestaurantHeaders("invalid", locale, uuid);
@@ -144,7 +150,7 @@ class RestaurantControllerUnitTest {
 									   .validateIngestRestaurantHeaders(marketCode, "invalid", uuid);
 		
 		assertThrows(HeaderValidationException.class, () -> {
-			restController.ingestRestaurant(marketCode, "invalid", uuid, restaurant);
+			restController.ingestRestaurant(marketCode, "invalid", uuid, jsonBody);
 		});
 		
 		verify(headerValidationService).validateIngestRestaurantHeaders(marketCode, "invalid", uuid);
@@ -163,7 +169,7 @@ class RestaurantControllerUnitTest {
 									   .validateIngestRestaurantHeaders(marketCode, locale, "invalid");
 		
 		assertThrows(HeaderValidationException.class, () -> {
-			restController.ingestRestaurant(marketCode, locale, "invalid", restaurant);
+			restController.ingestRestaurant(marketCode, locale, "invalid", jsonBody);
 		});
 		
 		verify(headerValidationService).validateIngestRestaurantHeaders(marketCode, locale, "invalid");
@@ -171,7 +177,7 @@ class RestaurantControllerUnitTest {
 	}
 	
 	@Test
-	void ingestRestaurant_Throw_ElasticSearchException() throws ElasticSearchException {
+	void ingestRestaurant_Throw_ElasticSearchException() throws ElasticSearchException, JsonMappingException, JsonProcessingException {
 
 		Restaurant restaurant = RestaruantIngestObject();
 
@@ -179,13 +185,13 @@ class RestaurantControllerUnitTest {
 		expectedResponse.setStatus(400);
 		
 		doThrow(new ElasticSearchException()).when(restService)
-												.ingestRestaurant(marketCode, locale, uuid, restaurant);
+												.ingestRestaurant(marketCode, locale, uuid, jsonBody);
 		
 		assertThrows(ElasticSearchException.class, () -> {
-			restController.ingestRestaurant(marketCode, locale, uuid, restaurant);
+			restController.ingestRestaurant(marketCode, locale, uuid, jsonBody);
 		});
 		
-		verify(restService).ingestRestaurant(marketCode, locale, uuid, restaurant);
+		verify(restService).ingestRestaurant(marketCode, locale, uuid, jsonBody);
 
 	}
 

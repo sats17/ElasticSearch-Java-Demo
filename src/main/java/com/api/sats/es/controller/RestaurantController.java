@@ -30,9 +30,10 @@ public class RestaurantController {
 			@RequestHeader(value = "sats-marketid", required = true) String marketCode,
 			@RequestHeader(value = "sats-locale", required = true) String locale,
 			@RequestHeader(value = "sats-uuid", required = true) String uuid,
-			@RequestBody Restaurant restaurant) throws Exception { 
+			@RequestBody String body) throws Exception { 
+		System.out.println(body);
 		headerValidationService.validateIngestRestaurantHeaders(marketCode, locale, uuid);
-		return restService.ingestRestaurant(marketCode, locale, uuid, restaurant);
+		return restService.ingestRestaurant(marketCode, locale, uuid, body);
 	} 
 
 }
