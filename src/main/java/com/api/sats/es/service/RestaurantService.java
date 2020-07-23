@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.api.sats.es.exception.ElasticSearchException;
 import com.api.sats.es.model.Address;
 import com.api.sats.es.model.Restaurant;
-import com.api.sats.es.model.Test;
 import com.api.sats.es.utilites.ApiResponeUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -49,9 +48,4 @@ public class RestaurantService {
 		return apiResponseUtility.ingestRestaurantSuccessResponse(response, uuid);
 	}
 	
-//	public Test testing(String body) throws JsonMappingException, JsonProcessingException {
-//		System.out.println(body);
-//		OBJECT_MAPPER.readValue(body, Test.class);
-//		return new Test();
-//	}
 }
