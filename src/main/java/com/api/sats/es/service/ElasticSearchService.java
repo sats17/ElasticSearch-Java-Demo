@@ -4,13 +4,17 @@
 package com.api.sats.es.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.api.sats.es.data.RestaurantSearchRepository;
 import com.api.sats.es.exception.ElasticSearchException;
+import com.api.sats.es.exception.InternalServerException;
 import com.api.sats.es.model.Restaurant;
 import com.api.sats.es.utilites.ApiResponeUtility;
+
+import static com.api.sats.es.config.Constants.ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE;
 
 /**
  * @author satikumb
@@ -25,18 +29,12 @@ public class ElasticSearchService {
 	@Autowired
 	private ApiResponeUtility apiResponseUtility;
 	
-	public Restaurant insert(Restaurant restaurant) {
-		Restaurant response;
+	public Restaurant insert(Restaurant restaurant) throws ElasticSearchException {
 		try {
-			response = restaurantRepository.save(restaurant);
-		} catch (Exception exception) {
-			return null;
-		}
-		if(response == null) {
-			return null;
-		} else {
-			return response;
-		}
+			return restaurantRepository.save(restaurant);
+		} catch (Exception exception) { 
+			throw new ElasticSearchException(apiResponseUtility.applicationProcessingException(ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE));
+		} 
 	}
 
 }

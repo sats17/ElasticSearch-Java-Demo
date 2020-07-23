@@ -3,12 +3,12 @@
  */
 package com.api.sats.es.service;
 
-import org.apache.lucene.search.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.api.sats.es.data.RestaurantSearchRepository;
+import com.api.sats.es.exception.ElasticSearchException;
 import com.api.sats.es.model.Restaurant;
 import com.api.sats.es.utilites.ApiResponeUtility;
 
@@ -17,7 +17,7 @@ import com.api.sats.es.utilites.ApiResponeUtility;
  *
  */
 @Service
-public class RestaurantService {
+public class RestaurantService { 
 	
 	@Autowired
 	private ElasticSearchService esService;
@@ -31,15 +31,14 @@ public class RestaurantService {
 		return null;
 	}
 
-	public ResponseEntity<Object> ingestRestaurant(String marketId, String locale, String uuid, Restaurant restaurant) {
+	public ResponseEntity<Object> ingestRestaurant(String marketCode, String locale, String uuid, Restaurant restaurant) throws ElasticSearchException {
 		
-		restaurant.setMarketCode(marketId);
+		restaurant.setMarketCode(marketCode);
 		restaurant.setLocalization(locale);
-		restaurant.setId(restaurant.getGblNumber()+":"+locale);
+		restaurant.setId(restaurant.getGblNumber()+":"+locale); 
 		Restaurant response = esService.insert(restaurant);
 		
 		return apiResponseUtility.ingestRestaurantSuccessResponse(response, uuid);
-		
 	}
 
 }

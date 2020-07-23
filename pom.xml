@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.api.sats</groupId>
 	<artifactId>Elasticsearch_Java</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>Elasticsearch_Java</name>
 	<description>Demo project for Spring Boot with elasticsearch</description>
 
@@ -25,7 +25,6 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-elasticsearch</artifactId>
-			<version>4.0.1.RELEASE</version>
 		</dependency>
 
 
@@ -69,8 +68,12 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
