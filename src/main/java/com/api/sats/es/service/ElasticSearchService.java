@@ -14,7 +14,7 @@ import com.api.sats.es.exception.InternalServerException;
 import com.api.sats.es.model.Restaurant;
 import com.api.sats.es.utilites.ApiResponeUtility;
 
-import static com.api.sats.es.config.Constants.ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE;
+import static com.api.sats.es.config.Constants.*;
 
 /**
  * @author satikumb
@@ -33,7 +33,8 @@ public class ElasticSearchService {
 		try {
 			return restaurantRepository.save(restaurant);
 		} catch (Exception exception) { 
-			throw new ElasticSearchException(apiResponseUtility.applicationProcessingException(ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE));
+			throw new ElasticSearchException(apiResponseUtility.applicationProcessingExceptionCreator(ELASTIC_SEARCH_EXCEPTION_RESULT_CODE, 
+					ELASTIC_SEARCH_EXCEPTION_RESULT_TYPE, ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE));
 		} 
 	}
 

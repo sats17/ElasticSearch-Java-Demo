@@ -32,14 +32,19 @@ import static com.api.sats.es.config.Constants.*;
 @Service
 public class ApiResponeUtility {
 
-	private static final ErrorResponse ElasticSearchExceptionCreator(String Message) {
-		return new ErrorResponse(new ErrorStatus(ELASTIC_SEARCH_EXCEPTION_ROOT_CODE, ELASTIC_SEARCH_EXCEPTION_ROOT_TYPE,
-				Collections.singletonList(new ErrorDetails(ELASTIC_SEARCH_EXCEPTION_RESULT_CODE,
-						ELASTIC_SEARCH_EXCEPTION_RESULT_TYPE, Message))));
+	public ResponseEntity<Object> applicationProcessingExceptionCreator(int resultCode, String resultType, String Message) {
+		return new ResponseEntity<Object>(
+			   new ErrorResponse(new ErrorStatus(SERVER_EXCEPTION_ROOT_CODE, SERVER_EXCEPTION_ROOT_TYPE,
+						Collections.singletonList(new ErrorDetails(resultCode, resultType, Message)))),
+				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	public ResponseEntity<Object> applicationProcessingException(String Message) {
-		return new ResponseEntity<Object>(ElasticSearchExceptionCreator(Message), HttpStatus.INTERNAL_SERVER_ERROR);
+	public ResponseEntity<Object> validationExceptionCreator(String uuid, int resultCode, String resultType,
+			String Message, String method, String requestURI) {
+		return new ResponseEntity<Object>(
+			   new ErrorResponse(new ErrorStatus(VALIDATION_EXCEPTION_ROOT_CODE, VALIDATION_EXCEPTION_ROOT_TYPE,
+						Collections.singletonList(new ErrorDetails(resultCode, resultType, Message, method, requestURI)))),
+				getHttpHeaders(uuid), HttpStatus.BAD_REQUEST);
 	}
 
 	private static final Status INGEST_RESTAURANT_SUCCESS = new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE,
@@ -52,36 +57,10 @@ public class ApiResponeUtility {
 				getHttpHeaders(uuid), HttpStatus.OK);
 	}
 
-	private static final ErrorResponse HeaderValidationExceptionCreator(String Message) {
-		return new ErrorResponse(
-				new ErrorStatus(HEADER_VALIDATION_EXCEPTION_ROOT_CODE, HEADER_VALIDATION_EXCEPTION_ROOT_TYPE,
-						Collections.singletonList(new ErrorDetails(HEADER_VALIDATION_EXCEPTION_RESULT_CODE,
-								HEADER_VALIDATION_EXCEPTION_RESULT_TYPE, Message))));
-	}
-
-	public ResponseEntity<Object> missingRequestHeaderException(String uuid, String Message) {
-		return new ResponseEntity<Object>(HeaderValidationExceptionCreator(Message), getHttpHeaders(uuid),
-				HttpStatus.BAD_REQUEST);
-	}
-	
-	private static final ErrorResponse RequestNotValidExceptionCreator(String method, String requestURI) {
-		return new ErrorResponse(
-				new ErrorStatus(REQUEST_NOT_VALID_EXCEPTION_ROOT_CODE, REQUEST_NOT_VALID_EXCEPTION_ROOT_TYPE, 
-						Collections.singletonList(new ErrorDetails(METHOD_NOT_VALID_EXCEPTION_RESULT_CODE,
-								METHOD_NOT_VALID_EXCEPTION_RESULT_TYPE,method,requestURI,METHOD_NOT_VALID_EXCEPTION_RESULT_MESSAGE)))); 
-				
-	}
-	
-	public ResponseEntity<Object> requestNotValidException(String method, String requestURI) {
-		return new ResponseEntity<Object>(RequestNotValidExceptionCreator(method, requestURI),HttpStatus.METHOD_NOT_ALLOWED);
-	}
-
 	private HttpHeaders getHttpHeaders(String uuid) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("sats-uuid", uuid);
 		return headers;
 	}
-
-	
 
 }

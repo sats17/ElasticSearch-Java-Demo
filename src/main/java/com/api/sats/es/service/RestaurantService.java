@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.api.sats.es.exception.ElasticSearchException;
+import com.api.sats.es.model.Address;
 import com.api.sats.es.model.Restaurant;
+import com.api.sats.es.model.Test;
 import com.api.sats.es.utilites.ApiResponeUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -28,7 +30,7 @@ public class RestaurantService {
 	@Autowired
 	private ApiResponeUtility apiResponseUtility;
 	
-	private ObjectMapper OBJECT_MAPPER;
+	private ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 	public ResponseEntity<Object> searchByRestaurantId(int pageSize, String marketId, String uuid, 
 			int restaurantId) {
@@ -36,28 +38,20 @@ public class RestaurantService {
 		return null;
 	}
 
-	public ResponseEntity<Object> ingestRestaurant(String marketCode, String locale, String uuid, String body) throws ElasticSearchException {
+	public ResponseEntity<Object> ingestRestaurant(String marketCode, String locale, String uuid, String body) throws ElasticSearchException, JsonMappingException, JsonProcessingException {
 		
-		Restaurant restaurant = null;
-		try {
-			System.out.println("Before ");
-			restaurant = OBJECT_MAPPER.readValue(body, Restaurant.class);
-			System.out.println("After");
-		} catch (JsonMappingException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
+		Restaurant restaurant = OBJECT_MAPPER.readValue(body, Restaurant.class);
 		restaurant.setMarketCode(marketCode);
 		restaurant.setLocalization(locale);
 		restaurant.setId(restaurant.getGblNumber()+":"+locale); 
-		System.out.println(restaurant);
 		Restaurant response = esService.insert(restaurant);
-		System.out.println(response);
 		
 		return apiResponseUtility.ingestRestaurantSuccessResponse(response, uuid);
 	}
-
+	
+//	public Test testing(String body) throws JsonMappingException, JsonProcessingException {
+//		System.out.println(body);
+//		OBJECT_MAPPER.readValue(body, Test.class);
+//		return new Test();
+//	}
 }
