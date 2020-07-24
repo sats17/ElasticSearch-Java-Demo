@@ -7,7 +7,7 @@ import com.sats.api.es.model.Location;
 import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.model.StoreType;
 
-public class UtilityUnitTest {
+public class Utility {
 
 	public static Restaurant RestaruantIngestObject() {
 		Restaurant restaurant = new Restaurant();

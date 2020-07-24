@@ -7,17 +7,15 @@ import static com.sats.api.es.config.Constants.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.sats.api.es.data.RestaurantSearchRepository;
 import com.sats.api.es.exception.ElasticSearchException;
-import com.sats.api.es.exception.InternalServerException;
 import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.utilites.ApiResponeUtility;
 
 /**
- * @author satikumb
+ * @author Sats17
  *
  */
 @Service

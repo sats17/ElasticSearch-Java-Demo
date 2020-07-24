@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.sats.api.es.error.response.ErrorDetails;
 import com.sats.api.es.error.response.ErrorResponse;
 import com.sats.api.es.error.response.ErrorStatus;
-import com.sats.api.es.exception.HeaderValidationException;
 import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.response.FinalResponse;
 import com.sats.api.es.response.Status;
@@ -30,18 +29,18 @@ import java.util.List;
 @Service
 public class ApiResponeUtility {
 
-	public ResponseEntity<Object> applicationProcessingExceptionCreator(int resultCode, String resultType, String Message) {
+	public ResponseEntity<Object> applicationProcessingExceptionCreator(int resultCode, String resultType, String message) {
 		return new ResponseEntity<Object>(
 			   new ErrorResponse(new ErrorStatus(SERVER_EXCEPTION_ROOT_CODE, SERVER_EXCEPTION_ROOT_TYPE,
-						Collections.singletonList(new ErrorDetails(resultCode, resultType, Message, null, null)))),
+						Collections.singletonList(new ErrorDetails(resultCode, resultType, message, null, null)))),
 				HttpStatus.INTERNAL_SERVER_ERROR); 
 	}
 
 	public ResponseEntity<Object> validationExceptionCreator(String uuid, int resultCode, String resultType,
-			String Message, String method, String requestURI) {
+			String message, String method, String requestURI) {
 		return new ResponseEntity<Object>(
 			   new ErrorResponse(new ErrorStatus(VALIDATION_EXCEPTION_ROOT_CODE, VALIDATION_EXCEPTION_ROOT_TYPE,
-						Collections.singletonList(new ErrorDetails(resultCode, resultType, Message, method, requestURI)))),
+						Collections.singletonList(new ErrorDetails(resultCode, resultType, message, method, requestURI)))),
 				getHttpHeaders(uuid), HttpStatus.BAD_REQUEST);
 	}
 

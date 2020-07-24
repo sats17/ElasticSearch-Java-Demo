@@ -5,7 +5,6 @@ package com.sats.api.es.model;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

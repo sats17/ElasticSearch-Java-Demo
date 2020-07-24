@@ -1,8 +1,7 @@
 package com.sats.api.es.service.test;
 
-import static com.sats.api.es.utilites.test.UtilityUnitTest.RestaruantReturnObject;
+import static com.sats.api.es.utilites.test.Utility.RestaruantReturnObject;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -18,14 +17,13 @@ import org.springframework.context.ApplicationContext;
 
 import com.sats.api.es.data.RestaurantSearchRepository;
 import com.sats.api.es.exception.ElasticSearchException;
-import com.sats.api.es.exception.HeaderValidationException;
 import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.service.ElasticSearchService;
 
 @SpringBootTest
 //@ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.WARN)
-public class ElasticSearchServiceUnitTest {
+class ElasticSearchServiceUnitTest {
 
 	@Autowired
 	ApplicationContext context;

@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.sats.api.es.model.Address;
 
 
-public class AddressUnitTest {
+class AddressUnitTest {
 	
 	Address obj1; 
 	Address obj2;

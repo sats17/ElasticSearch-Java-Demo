@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.sats.api.es.model.Location;
 
-public class LocationUnitTest {
+class LocationUnitTest {
 	
 	Location obj1; 
 	Location obj2;

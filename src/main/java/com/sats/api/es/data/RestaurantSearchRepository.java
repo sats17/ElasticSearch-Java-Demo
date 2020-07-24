@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.sats.api.es.model.Restaurant;
 
 /**
- * @author satikumb
+ * @author Sats17
  *
  */
 @Repository

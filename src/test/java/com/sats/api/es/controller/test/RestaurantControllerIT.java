@@ -25,7 +25,7 @@ import com.sats.api.es.model.StoreType;
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class RestaurantControllerIT {
+class RestaurantControllerIT {
 
 	@Autowired
 	private MockMvc mockMvc;
