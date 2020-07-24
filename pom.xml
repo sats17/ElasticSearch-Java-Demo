@@ -9,7 +9,7 @@
 		<version>2.3.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.api.sats</groupId>
+	<groupId>com.sats.api</groupId>
 	<artifactId>Elasticsearch_Java</artifactId>
 	<version>0.0.1</version>
 	<name>Elasticsearch_Java</name>
@@ -39,6 +39,11 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 		</dependency>
 
 		<dependency>
