@@ -19,7 +19,7 @@ public class HeaderValidationService {
 	private ApiResponeUtility apiResponseUtility;
 
 	public void validateIngestRestaurantHeaders(String marketCode, String locale, String uuid) throws HeaderValidationException {
-		try {
+		try { 
 			validateMarketCode(marketCode);
 			validateUuid(uuid);
 			validateLocale(locale);

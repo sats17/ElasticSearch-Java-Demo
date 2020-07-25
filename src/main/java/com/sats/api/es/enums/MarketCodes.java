@@ -15,6 +15,6 @@ public enum MarketCodes {
 	}
 	
 	public static boolean isMarketCodePresent(String marketCode) {
-		return enums.contains(marketCode);
+		return enums.contains(marketCode.toUpperCase());
 	}
 }

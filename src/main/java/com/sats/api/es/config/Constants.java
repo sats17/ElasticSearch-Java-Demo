@@ -2,11 +2,13 @@ package com.sats.api.es.config;
 
 public class Constants { 
 	
+	private Constants() {}
+	
 	public static final String BASE_API_PATH = "/api/restaurants";
 	public static final String RESTAURANT_INGEST_PATH = "/ingest";
 
 	public static final int SUCCESS_ROOT_CODE = 20000;
-	public static final String SUCCESS_ROOT_TYPE = "success";
+	public static final String SUCCESS_ROOT_TYPE = "Success";
 	public static final String INGEST_RESTAURANT_SUCCESS_MESSAGE = "Restaurant insert successfully";
 	
 	public static final int SERVER_EXCEPTION_ROOT_CODE = 50000;

@@ -33,7 +33,7 @@ public class ApiResponeUtility {
 		return new ResponseEntity<Object>(
 			   new ErrorResponse(new ErrorStatus(SERVER_EXCEPTION_ROOT_CODE, SERVER_EXCEPTION_ROOT_TYPE,
 						Collections.singletonList(new ErrorDetails(resultCode, resultType, message, null, null)))),
-				HttpStatus.INTERNAL_SERVER_ERROR); 
+				HttpStatus.INTERNAL_SERVER_ERROR);  
 	}
 
 	public ResponseEntity<Object> validationExceptionCreator(String uuid, int resultCode, String resultType,
@@ -42,20 +42,18 @@ public class ApiResponeUtility {
 			   new ErrorResponse(new ErrorStatus(VALIDATION_EXCEPTION_ROOT_CODE, VALIDATION_EXCEPTION_ROOT_TYPE,
 						Collections.singletonList(new ErrorDetails(resultCode, resultType, message, method, requestURI)))),
 				getHttpHeaders(uuid), HttpStatus.BAD_REQUEST);
-	}
-
-	private static final Status INGEST_RESTAURANT_SUCCESS = new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE,
-			INGEST_RESTAURANT_SUCCESS_MESSAGE);
-
-	public ResponseEntity<Object> ingestRestaurantSuccessResponse(Restaurant response, String uuid) {
+	} 
+	
+	public ResponseEntity<Object> successResponseCreator(Restaurant response, String message, String uuid) {
 		List<Restaurant> responseList = new ArrayList<>();
 		responseList.add(response);
-		return new ResponseEntity<Object>(new FinalResponse(INGEST_RESTAURANT_SUCCESS, responseList),
-				getHttpHeaders(uuid), HttpStatus.OK);
+		return new ResponseEntity<Object>(
+			   new FinalResponse(new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, message), responseList),
+			   getHttpHeaders(uuid), HttpStatus.OK);
 	}
 
-	private HttpHeaders getHttpHeaders(String uuid) {
-		HttpHeaders headers = new HttpHeaders();
+	public HttpHeaders getHttpHeaders(String uuid) {
+		HttpHeaders headers = new HttpHeaders(); 
 		headers.set("sats-uuid", uuid);
 		return headers;
 	}

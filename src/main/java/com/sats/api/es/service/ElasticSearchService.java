@@ -23,17 +23,18 @@ public class ElasticSearchService {
 
 	@Autowired
 	private RestaurantSearchRepository restaurantRepository;
-	
+
 	@Autowired
 	private ApiResponeUtility apiResponseUtility;
-	
+
 	public Restaurant insert(Restaurant restaurant) throws ElasticSearchException {
 		try {
 			return restaurantRepository.save(restaurant);
-		} catch (Exception exception) { 
-			throw new ElasticSearchException(apiResponseUtility.applicationProcessingExceptionCreator(ELASTIC_SEARCH_EXCEPTION_RESULT_CODE, 
-					ELASTIC_SEARCH_EXCEPTION_RESULT_TYPE, ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE));
-		} 
+		} catch (Exception exception) {
+			throw new ElasticSearchException(apiResponseUtility.applicationProcessingExceptionCreator(
+							ELASTIC_SEARCH_EXCEPTION_RESULT_CODE,
+							ELASTIC_SEARCH_EXCEPTION_RESULT_TYPE, ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE));
+		}
 	}
 
 }

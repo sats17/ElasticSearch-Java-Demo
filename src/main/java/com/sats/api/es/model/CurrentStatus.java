@@ -20,7 +20,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString 
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor

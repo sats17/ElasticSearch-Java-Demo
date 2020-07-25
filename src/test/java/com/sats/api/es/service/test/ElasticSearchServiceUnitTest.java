@@ -37,13 +37,9 @@ class ElasticSearchServiceUnitTest {
 	@Test
 	public void test_validateIngestRestaurantHeaders_success() throws ElasticSearchException {
 			
-		System.out.println(RestaruantReturnObject().toString());
-		
-		
 		doReturn(RestaruantReturnObject()).when(restauratRepository).save(RestaruantReturnObject());
 		
-		Restaurant response = elasticSearchService.insert(RestaruantReturnObject());
-		System.out.println(response);
+		Restaurant response = elasticSearchService.insert(RestaruantReturnObject()); 
 		assertThat(response).isEqualTo(RestaruantReturnObject());
 		
 	}
@@ -55,8 +51,7 @@ class ElasticSearchServiceUnitTest {
 		
 		assertThrows(RuntimeException.class, () -> {
 			elasticSearchService.insert(new Restaurant());
-		});
-		
+		}); 
 	}
 	
 }

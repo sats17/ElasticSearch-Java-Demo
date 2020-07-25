@@ -10,14 +10,16 @@ import com.sats.api.es.exception.RequestHeaderException;
 
 public class RequestValidationUtility {
 
+	private RequestValidationUtility() {}
+	
 	public static void validateMarketCode(String marketCode) throws RequestHeaderException {
-		if(marketCode.isBlank() || marketCode == null || !isMarketCodePresent(marketCode)) {
+		if(marketCode == null || marketCode.isBlank() || !isMarketCodePresent(marketCode)) {
 			throw new RequestHeaderException(MARKET_CODE_EXCEPTION_RESULT_MESSAGE);
-		}
-	}
+		} 
+	} 
 	
 	public static void validateLocale(String locale) throws RequestHeaderException {
-		if(locale.isBlank() || locale == null || !isLocaleContains(locale)) {
+		if(locale == null || locale.isBlank() || !isLocaleContains(locale)) {
 			throw new RequestHeaderException(LOCALE_EXCEPTION_RESULT_MESSAGE);
 		} 
 	}

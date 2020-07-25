@@ -85,7 +85,7 @@ class RestaurantControllerUnitTest {
 	MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
 
 	private static final String marketCode = "US";
-	private static final String locale = "en-US";
+	private static final String locale = "en-US"; 
 	private static final String uuid = "12345";
 	private static final Status INGEST_RESTAURANT_SUCCESS = new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE,
 			INGEST_RESTAURANT_SUCCESS_MESSAGE);
@@ -106,7 +106,7 @@ class RestaurantControllerUnitTest {
 		
 		expectedResponse.setStatus(200);
 
-		
+		 
 		ArrayList<Restaurant> responseList = new ArrayList<>();
 		responseList.add(RestaruantReturnObject()); 
 
@@ -117,7 +117,7 @@ class RestaurantControllerUnitTest {
 
 		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatusCodeValue());
 		verify(restService).ingestRestaurant(marketCode, locale, uuid, jsonBody);
-	}
+	} 
 
 	@Test
 	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_marketid() throws HeaderValidationException {

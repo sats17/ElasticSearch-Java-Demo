@@ -14,6 +14,8 @@ import com.sats.api.es.exception.ElasticSearchException;
 import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.utilites.ApiResponeUtility;
 
+import static com.sats.api.es.config.Constants.*;
+
 /**
  * @author Sats17
  *
@@ -33,18 +35,18 @@ public class RestaurantService {
 	public ResponseEntity<Object> searchByRestaurantId(int pageSize, String marketId, String uuid, 
 			int restaurantId) {
 		
-		return null;
+		return null; 
 	}
 
 	public ResponseEntity<Object> ingestRestaurant(String marketCode, String locale, String uuid, String body) throws ElasticSearchException, JsonMappingException, JsonProcessingException {
 		
 		Restaurant restaurant = OBJECT_MAPPER.readValue(body, Restaurant.class);
 		restaurant.setMarketCode(marketCode);
-		restaurant.setLocalization(locale);
+		restaurant.setLocalization(locale); 
 		restaurant.setId(restaurant.getGblNumber()+":"+locale); 
 		Restaurant response = esService.insert(restaurant);
 		
-		return apiResponseUtility.ingestRestaurantSuccessResponse(response, uuid);
+		return apiResponseUtility.successResponseCreator(response, INGEST_RESTAURANT_SUCCESS_MESSAGE, uuid);
 	}
 	
 }
