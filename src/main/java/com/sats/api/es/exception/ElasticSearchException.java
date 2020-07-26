@@ -6,21 +6,21 @@ package com.sats.api.es.exception;
 import org.springframework.http.ResponseEntity;
 
 /**
- * @author satikumb
+ * @author Sats17
  *
  */
 public class ElasticSearchException extends Exception {
 
-	private ResponseEntity<Object> response;
+	private static final long serialVersionUID = -1760760238664768333L;
+	final transient ResponseEntity<Object> response;
 	
 	public ElasticSearchException() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.response = null;
 	}
 
 	public ElasticSearchException(ResponseEntity<Object> response) {
 		this.response = response;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ResponseEntity<Object> getResponse() {

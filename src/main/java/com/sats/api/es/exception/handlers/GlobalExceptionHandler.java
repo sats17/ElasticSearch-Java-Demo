@@ -2,7 +2,6 @@ package com.sats.api.es.exception.handlers;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -39,7 +38,7 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(value = HeaderValidationException.class)
 	public ResponseEntity<Object> headerValidationException(HeaderValidationException headerValidationException) {
-		return headerValidationException.getResponse();
+		return headerValidationException.getInfo();
 	}
 
 	@ExceptionHandler({ JsonProcessingException.class, JsonMappingException.class })

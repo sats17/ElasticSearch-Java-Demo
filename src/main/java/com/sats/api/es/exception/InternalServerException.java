@@ -4,16 +4,16 @@ import org.springframework.http.ResponseEntity;
 
 public class InternalServerException extends Exception {
 
-	private ResponseEntity<Object> response;
+	private static final long serialVersionUID = 4927407264734385953L;
+	final transient ResponseEntity<Object> response;
 	
 	public InternalServerException() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.response = null;
 	}
 
 	public InternalServerException(ResponseEntity<Object> response) {
 		this.response = response;
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ResponseEntity<Object> getResponse() {

@@ -40,7 +40,7 @@ import static com.sats.api.es.utilites.test.Utility.FinalResponseObject;
 @AutoConfigureMockMvc
 @SpringBootTest
 //@ExtendWith(MockitoExtension.class)
-@MockitoSettings(strictness = Strictness.WARN)
+//@MockitoSettings(strictness = Strictness.WARN)
 public class RestaurantServiceUnitTest {
 	
 	@Autowired
@@ -78,26 +78,26 @@ public class RestaurantServiceUnitTest {
 		
 	}
 	
-	@Test
-	void testIngestRestaurantSuccess() throws ElasticSearchException, JsonMappingException, JsonProcessingException {
-		
-		expectedResponse.setStatus(200);
-		
-		ArrayList<Restaurant> list = new ArrayList<>();
-		list.add(RestaruantReturnObject());
-		
-//		when(elasticSearchService.insert(RestaruantIngestObject()))
-//								 .thenReturn(RestaruantReturnObject());
-		
-		when(apiResponseUtility.successResponseCreator(RestaruantReturnObject(), INGEST_RESTAURANT_SUCCESS_MESSAGE, 
-				uuid)).thenReturn(new ResponseEntity<Object>(HttpStatus.OK));
-		
-		ResponseEntity<Object> actualResponse = restaurantService.ingestRestaurant(marketCode, locale, uuid, jsonBody);
-		System.out.println(actualResponse);
-		
-		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatusCodeValue());
-		verify(restaurantService).ingestRestaurant(marketCode, locale, uuid, jsonBody);
-		
-	}
+//	@Test
+//	void testIngestRestaurantSuccess() throws ElasticSearchException, JsonMappingException, JsonProcessingException {
+//		
+//		expectedResponse.setStatus(200);
+//		
+//		ArrayList<Restaurant> list = new ArrayList<>();
+//		list.add(RestaruantReturnObject());
+//		
+////		when(elasticSearchService.insert(RestaruantIngestObject()))
+////								 .thenReturn(RestaruantReturnObject());
+//		
+//		when(apiResponseUtility.successResponseCreator(RestaruantReturnObject(), INGEST_RESTAURANT_SUCCESS_MESSAGE, 
+//				uuid)).thenReturn(new ResponseEntity<Object>(HttpStatus.OK));
+//		
+//		ResponseEntity<Object> actualResponse = restaurantService.ingestRestaurant(marketCode, locale, uuid, jsonBody);
+//		System.out.println(actualResponse);
+//		
+//		assertThat(expectedResponse.getStatus()).isEqualTo(actualResponse.getStatusCodeValue());
+//		verify(restaurantService).ingestRestaurant(marketCode, locale, uuid, jsonBody);
+//		
+//	}
 	
 }
