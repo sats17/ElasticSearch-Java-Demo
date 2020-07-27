@@ -158,11 +158,23 @@ class AddressUnitTest {
 	}
 	
 	@Test
-    public void testToString()
-    {
+    public void testToString() {
         Address obj = new Address();
         String expected = "Address(country=null, stateProvince=null, postalZip=null, cityTown=null, addressLine=null, region=null)";
         assertEquals(expected, obj.toString());
     }
+	
+	@Test
+	public void testSetterMethods() {
+		Address obj = new Address();
+		obj.setAddressLine("Line");
+		obj.setCityTown("Town");
+		obj.setCountry("India");
+		obj.setStateProvince("StateProvince");
+		obj.setRegion("region");
+		obj.setPostalZip(1234);
+		assertTrue(obj.equals(obj1));
+		
+	}
 	
 }

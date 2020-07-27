@@ -62,4 +62,11 @@ public class FinalResponseTest {
 		assertEquals(obj2.hashCode(), hashcode);
 	}
 	
+	@Test
+	public void test_toString() {
+		System.out.println(obj1.toString());
+		String expected = "FinalResponse(status=Status(code=0, type=null, message=null), restaurnts=[Restaurant(id=195500273006:en-US, nationalStoreNumber=1349, storeIdentifierType=NATLSTRNUMBER, localization=en-US, gblNumber=195500273006, countryCode=US, marketCode=US, address=Address(country=USA, stateProvince=MO, postalZip=64119, cityTown=Claycomo, addressLine=290 E 69 Hwy, region=DENVER FIELD OFFICE), generalStatus=GeneralStatus(status=OPEN, startDate=26-02-2019, endDate=15-02-2025), currentStatus=CurrentStatus(status=OPEN, startDate=26-02-2019, endDate=15-02-2025), location=Location(latitude=39.200516, longtitude=-94.499097), storeType=StoreType(storeTypeCode=FREESTANDING, partyName=partyHere))])";
+		assertEquals(expected, obj1.toString());
+	}
+	
 }

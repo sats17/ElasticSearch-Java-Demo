@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
  * @author Sats17
  *
  */
-public class ElasticSearchException extends Exception {
+public class ElasticSearchException extends RuntimeException {
 
 	private static final long serialVersionUID = -1760760238664768333L;
 	final transient ResponseEntity<Object> response;

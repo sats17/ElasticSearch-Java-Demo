@@ -14,6 +14,8 @@ import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.sats.api.es.data.RestaurantSearchRepository;
 import com.sats.api.es.exception.ElasticSearchException;
