@@ -1,0 +1,27 @@
+{
+          "nationalStoreNumber" : 1301,
+          "storeIdentifierType" : "NATLSTRNUMBER",
+          "gblNumber" : "195500273012",
+          "countryCode" : "US",
+          "address" : {
+            "country" : "USA",
+            "stateProvince" : "SP",
+            "postalZip" : "64117",
+            "cityTown" : "Claycasfo",
+            "addressLine1" : "209 E 69 Hwy",
+            "region" : "DENVER Install OFFICE"
+          },
+          "generalStatus" : {
+            "status" : "OPEN"
+          },
+          "currentStatus" : {
+            "status" : "OPEN"
+          },
+          "location" : {
+            "latitude" : 30.200516,
+            "longtitude" : -9.499097
+          },
+          "storeType" : {
+            "storeTypeCode" : "FREEUPSTANDING"
+          }
+        }
