@@ -33,8 +33,7 @@ public class RestaurantController {
 			@RequestHeader(value = "sats-marketid", required = true) String marketCode,
 			@RequestHeader(value = "sats-locale", required = true) String locale,
 			@RequestHeader(value = "sats-uuid", required = true) String uuid, 
-			@RequestBody String body)
-			throws RequestBodyValidationException, JsonProcessingException, ElasticSearchException {
+			@RequestBody String body) throws RequestBodyValidationException, ElasticSearchException {
 
 		Restaurant restaurant = requestValidationService.validateIngestRestaurantRequest(marketCode, locale, uuid, body);
 		return restService.ingestRestaurant(marketCode, locale, uuid, restaurant);

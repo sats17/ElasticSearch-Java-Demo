@@ -3,8 +3,6 @@ package com.sats.api.es.enums;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.base.Enums;
-
 public enum Locales {
 
 	enUS("en-US"), enUK("en-UK"), enCA("en-CA"), enAU("en-AU");

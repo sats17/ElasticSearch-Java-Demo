@@ -7,14 +7,13 @@ import static com.sats.api.es.enums.Locales.isLocaleContains;
 import static com.sats.api.es.enums.MarketCodes.isMarketCodePresent;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sats.api.es.exception.RequestHeaderValidationException;
 import com.sats.api.es.model.Restaurant;
 
 public class RequestValidationUtility {
 
-	private static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+	private static ObjectMapper mapper = new ObjectMapper();
 
 	private RequestValidationUtility() {
 	}
@@ -39,7 +38,7 @@ public class RequestValidationUtility {
 
 	public static Restaurant validateRequestBody(String body) throws JsonProcessingException {
 
-		return OBJECT_MAPPER.readValue(body, Restaurant.class);
+		return mapper.readValue(body, Restaurant.class);
 
 	}
 

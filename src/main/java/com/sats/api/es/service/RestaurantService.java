@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.sats.api.es.exception.ElasticSearchException;
 import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.utilites.ApiResponeUtility;
