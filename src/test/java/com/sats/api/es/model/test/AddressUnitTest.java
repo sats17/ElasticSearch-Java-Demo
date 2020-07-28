@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import com.sats.api.es.model.Address;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 
 class AddressUnitTest {
@@ -110,51 +110,8 @@ class AddressUnitTest {
 	}
 	
 	@Test
-	public void test_hash_code() {
-		int hashcode = obj1.hashCode();
-		assertEquals(obj1.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_country() {
-		Address obj3 = new Address(null, "StateProvince", 1234, "Town", "Line", "region");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_stateProvince() {
-		Address obj3 = new Address("India", null, 1234, "Town", "Line", "region");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_postalzip() {
-		Address obj3 = new Address("India", "StateProvince", null, "Town", "Line", "region");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_cityTown() {
-		Address obj3 = new Address("India", "StateProvince", 1234, null, "Line", "region");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_addressLine() {
-		Address obj3 = new Address("India", "StateProvince", 1234, "Town", null, "region");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_region() { 
-		Address obj3 = new Address("India", "StateProvince", 1234, "Town", "Line", null);
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
+	public void testEqualsAndHashCode() {
+		EqualsVerifier.simple().forClass(Address.class).verify();
 	}
 	
 	@Test

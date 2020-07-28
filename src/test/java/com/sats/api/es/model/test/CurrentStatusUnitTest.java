@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import com.sats.api.es.model.CurrentStatus;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 class CurrentStatusUnitTest {
 
@@ -73,30 +73,8 @@ class CurrentStatusUnitTest {
 	}
 	
 	@Test
-	public void test_hash_code() {
-		int hashcode =  new CurrentStatus("Currentstatus", "startDate", "enddate").hashCode();
-		assertEquals(obj1.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_currentStatus() {
-		CurrentStatus obj3 = new CurrentStatus(null, "startdate", "enddate");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_startDate() {
-		CurrentStatus obj3 = new CurrentStatus("Currentstatus", null, "enddate");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_postalzip() {
-		CurrentStatus obj3 = new CurrentStatus("Currentstatus", "startdate", null);
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
+	public void testEqualsAndHashCode() {
+		EqualsVerifier.simple().forClass(CurrentStatus.class).verify();
 	}
 	
 	@Test

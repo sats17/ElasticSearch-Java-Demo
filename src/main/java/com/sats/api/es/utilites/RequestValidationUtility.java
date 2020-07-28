@@ -6,28 +6,41 @@ import static com.sats.api.es.config.Constants.UUID_EXCEPTION_RESULT_MESSAGE;
 import static com.sats.api.es.enums.Locales.isLocaleContains;
 import static com.sats.api.es.enums.MarketCodes.isMarketCodePresent;
 
-import com.sats.api.es.exception.RequestHeaderException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sats.api.es.exception.RequestHeaderValidationException;
+import com.sats.api.es.model.Restaurant;
 
 public class RequestValidationUtility {
 
-	private RequestValidationUtility() {}
-	
-	public static void validateMarketCode(String marketCode) throws RequestHeaderException {
-		if(marketCode == null || marketCode.isBlank() || !isMarketCodePresent(marketCode)) {
-			throw new RequestHeaderException(MARKET_CODE_EXCEPTION_RESULT_MESSAGE);
-		} 
-	} 
-	
-	public static void validateLocale(String locale) throws RequestHeaderException {
-		if(locale == null || locale.isBlank() || !isLocaleContains(locale)) {
-			throw new RequestHeaderException(LOCALE_EXCEPTION_RESULT_MESSAGE);
-		} 
+	private static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+	private RequestValidationUtility() {
 	}
-	
-	public static void validateUuid(String uuid) throws RequestHeaderException {
-		if(uuid == null || uuid.isBlank()) {
-			throw new RequestHeaderException(UUID_EXCEPTION_RESULT_MESSAGE);
+
+	public static void validateMarketCode(String marketCode) throws RequestHeaderValidationException {
+		if (marketCode == null || marketCode.isBlank() || !isMarketCodePresent(marketCode)) {
+			throw new RequestHeaderValidationException(MARKET_CODE_EXCEPTION_RESULT_MESSAGE);
 		}
 	}
-	
+
+	public static void validateLocale(String locale) throws RequestHeaderValidationException {
+		if (locale == null || locale.isBlank() || !isLocaleContains(locale)) {
+			throw new RequestHeaderValidationException(LOCALE_EXCEPTION_RESULT_MESSAGE);
+		}
+	}
+
+	public static void validateUuid(String uuid) throws RequestHeaderValidationException {
+		if (uuid == null || uuid.isBlank()) {
+			throw new RequestHeaderValidationException(UUID_EXCEPTION_RESULT_MESSAGE);
+		}
+	}
+
+	public static Restaurant validateRequestBody(String body) throws JsonProcessingException {
+
+		return OBJECT_MAPPER.readValue(body, Restaurant.class);
+
+	}
+
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sats.api.es.exception.ElasticSearchException;
 import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.utilites.ApiResponeUtility;
@@ -30,7 +29,7 @@ public class RestaurantService {
 	@Autowired
 	private ApiResponeUtility apiResponseUtility;
 	
-	private ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+	
 
 	public ResponseEntity<Object> searchByRestaurantId(int pageSize, String marketId, String uuid, 
 			int restaurantId) {
@@ -38,9 +37,9 @@ public class RestaurantService {
 		return null; 
 	}
 
-	public ResponseEntity<Object> ingestRestaurant(String marketCode, String locale, String uuid, String body) throws ElasticSearchException, JsonMappingException, JsonProcessingException {
+	public ResponseEntity<Object> ingestRestaurant(String marketCode, String locale, String uuid, Restaurant restaurant) 
+			throws ElasticSearchException {
 		
-		Restaurant restaurant = OBJECT_MAPPER.readValue(body, Restaurant.class);
 		restaurant.setMarketCode(marketCode);
 		restaurant.setLocalization(locale); 
 		restaurant.setId(restaurant.getGblNumber()+":"+locale); 

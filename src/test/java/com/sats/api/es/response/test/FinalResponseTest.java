@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.response.FinalResponse;
 import com.sats.api.es.response.Status;
+
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 import static com.sats.api.es.utilites.test.Utility.RestaruantReturnObject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -43,23 +46,8 @@ public class FinalResponseTest {
 	}
 	
 	@Test
-	public void test_hash_code() {
-		int hashcode =  obj2.hashCode();
-		assertEquals(obj1.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_when_status_is_null() {
-		obj2.setStatus(null);
-		int hashcode =  obj2.hashCode();
-		assertEquals(obj2.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_when_restaurants_is_null() {
-		obj2.setRestaurnts(null);
-		int hashcode = obj2.hashCode();
-		assertEquals(obj2.hashCode(), hashcode);
+	public void simpleEqualsContract() {
+	    EqualsVerifier.simple().forClass(FinalResponse.class).verify();
 	}
 	
 	@Test

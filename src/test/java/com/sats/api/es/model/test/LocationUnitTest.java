@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import com.sats.api.es.model.Location;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 class LocationUnitTest {
 	
@@ -61,23 +61,8 @@ class LocationUnitTest {
 	}
 	
 	@Test
-	public void test_hash_code() {
-		int hashcode =  new Location(18.0, 19.0).hashCode();
-		assertEquals(obj1.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_Latitude() {
-		Location obj3 = new Location(null, 19.0);
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode); 
-	}
-	
-	@Test
-	public void test_hash_code_of_null_Logntitude() {
-		Location obj3 = new Location(18.0, null);
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
+	public void testEqualsAndHashCode() {
+		EqualsVerifier.simple().forClass(Location.class).verify();
 	}
 	
 	@Test

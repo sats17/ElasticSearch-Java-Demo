@@ -2,17 +2,17 @@ package com.sats.api.es.exception;
 
 import org.springframework.http.ResponseEntity;
 
-public class HeaderValidationException extends Exception {
+public class RequestBodyValidationException extends Exception {
 
 	private static final long serialVersionUID = -2936997613994069788L;
 	final transient ResponseEntity<Object> response;
 
-	public HeaderValidationException() {
+	public RequestBodyValidationException() {
 		super();
 		this.response = null;
 	}
 
-	public HeaderValidationException(ResponseEntity<Object> response) {
+	public RequestBodyValidationException(ResponseEntity<Object> response) {
 		this.response = response;
 	}
 

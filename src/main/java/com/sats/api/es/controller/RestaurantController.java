@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.sats.api.es.exception.ElasticSearchException;
-import com.sats.api.es.exception.HeaderValidationException;
-import com.sats.api.es.service.HeaderValidationService;
+import com.sats.api.es.exception.RequestBodyValidationException;
+import com.sats.api.es.model.Restaurant;
+import com.sats.api.es.service.RequestValidationService;
 import com.sats.api.es.service.RestaurantService;
 
 @RestController
@@ -26,7 +26,7 @@ public class RestaurantController {
 	private RestaurantService restService;
 
 	@Autowired
-	private HeaderValidationService headerValidationService;
+	private RequestValidationService requestValidationService;
 
 	@PostMapping(RESTAURANT_INGEST_PATH)
 	public ResponseEntity<Object> ingestRestaurant(
@@ -34,9 +34,9 @@ public class RestaurantController {
 			@RequestHeader(value = "sats-locale", required = true) String locale,
 			@RequestHeader(value = "sats-uuid", required = true) String uuid, 
 			@RequestBody String body)
-			throws HeaderValidationException, JsonMappingException, JsonProcessingException, ElasticSearchException {
+			throws RequestBodyValidationException, JsonProcessingException, ElasticSearchException {
 
-		headerValidationService.validateIngestRestaurantHeaders(marketCode, locale, uuid);
-		return restService.ingestRestaurant(marketCode, locale, uuid, body);
+		Restaurant restaurant = requestValidationService.validateIngestRestaurantRequest(marketCode, locale, uuid, body);
+		return restService.ingestRestaurant(marketCode, locale, uuid, restaurant);
 	}
 }

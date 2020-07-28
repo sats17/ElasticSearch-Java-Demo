@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import com.sats.api.es.model.GeneralStatus;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 class GeneralStatusUnitTest {
 
@@ -73,30 +73,8 @@ class GeneralStatusUnitTest {
 	}
 	
 	@Test
-	public void test_hash_code() {
-		int hashcode =  new GeneralStatus("GeneralStatus", "startDate", "enddate").hashCode();
-		assertEquals(obj1.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_GeneralStatus() {
-		GeneralStatus obj3 = new GeneralStatus(null, "startdate", "enddate");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_startDate() {
-		GeneralStatus obj3 = new GeneralStatus("GeneralStatus", null, "enddate");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	}
-	
-	@Test
-	public void test_hash_code_of_null_postalzip() {
-		GeneralStatus obj3 = new GeneralStatus("GeneralStatus", "startdate", null);
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
+	public void testEqualsAndHashCode() {
+		EqualsVerifier.simple().forClass(GeneralStatus.class).verify();
 	}
 	
 	@Test

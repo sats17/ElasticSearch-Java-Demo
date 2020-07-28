@@ -6,28 +6,28 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import com.sats.api.es.exception.RequestHeaderException;
+import com.sats.api.es.exception.RequestHeaderValidationException;
 import com.sats.api.es.utilites.RequestValidationUtility;
 
 public class RequestValidationUtilityTest {
 
 	
 	@Test
-	public void TestCorrectMarketCode() throws RequestHeaderException {
+	public void TestCorrectMarketCode() throws RequestHeaderValidationException {
 		assertDoesNotThrow(() -> {
 			RequestValidationUtility.validateMarketCode("us");
 		});
 	}
 	
 	@Test
-	public void TestCorrectLocale() throws RequestHeaderException {
+	public void TestCorrectLocale() throws RequestHeaderValidationException {
 		assertDoesNotThrow(() -> {
 			RequestValidationUtility.validateLocale("en-US");
 		});
 	}
 	
 	@Test
-	public void TestCorrectUuid() throws RequestHeaderException {
+	public void TestCorrectUuid() throws RequestHeaderValidationException {
 		assertDoesNotThrow(() -> {
 			RequestValidationUtility.validateUuid("12345");
 		});
@@ -35,56 +35,56 @@ public class RequestValidationUtilityTest {
 
 	@Test
 	public void TestMarketCodeIsNull() {
-		assertThrows(RequestHeaderException.class, () -> {
+		assertThrows(RequestHeaderValidationException.class, () -> {
 			RequestValidationUtility.validateMarketCode(null);
 		});
 	}
 	
 	@Test
 	public void TestMarketCodeIsBlank() {
-		assertThrows(RequestHeaderException.class, () -> {
+		assertThrows(RequestHeaderValidationException.class, () -> {
 			RequestValidationUtility.validateMarketCode("");
 		});
 	}
 	
 	@Test
 	public void TestMarketCodeIsWrong() {
-		assertThrows(RequestHeaderException.class, () -> {
+		assertThrows(RequestHeaderValidationException.class, () -> {
 			RequestValidationUtility.validateMarketCode("MY");
 		});
 	}
 	
 	@Test
 	public void TestLocaleIsNull() {
-		assertThrows(RequestHeaderException.class, () -> {
+		assertThrows(RequestHeaderValidationException.class, () -> {
 			RequestValidationUtility.validateLocale(null);
 		});
 	}
 	
 	@Test
 	public void TestLocaleIsBlank() {
-		assertThrows(RequestHeaderException.class, () -> {
+		assertThrows(RequestHeaderValidationException.class, () -> {
 			RequestValidationUtility.validateLocale("");
 		});
 	}
 	
 	@Test
 	public void TestLocaleIsWrong() {
-		assertThrows(RequestHeaderException.class, () -> {
+		assertThrows(RequestHeaderValidationException.class, () -> {
 			RequestValidationUtility.validateLocale("en-MY");
 		});
 	}
 	
 	@Test
 	public void TestUuidIsNull() {
-		assertThrows(RequestHeaderException.class, () -> {
+		assertThrows(RequestHeaderValidationException.class, () -> {
 			RequestValidationUtility.validateUuid(null);
 		});
 	}
 	
 	@Test
 	public void TestUuidIsBlank() {
-		assertThrows(RequestHeaderException.class, () -> {
+		assertThrows(RequestHeaderValidationException.class, () -> {
 			RequestValidationUtility.validateUuid("");
 		});
 	}

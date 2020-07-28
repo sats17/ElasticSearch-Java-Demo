@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import com.sats.api.es.model.StoreType;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 class StoreTypeUnitTest {
 
@@ -61,24 +61,9 @@ class StoreTypeUnitTest {
 	}
 	
 	@Test
-	public void test_hash_code() {
-		int hashcode =  new StoreType("storeTypeCode", "partyName").hashCode();
-		assertEquals(obj1.hashCode(), hashcode);
+	public void testEqualsAndHashCode() {
+		EqualsVerifier.simple().forClass(StoreType.class).verify();
 	}
-	
-	@Test
-	public void test_hash_code_of_null_storyTypeName() {
-		StoreType obj3 = new StoreType(null, "partyName");
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode); 
-	}
-	
-	@Test
-	public void test_hash_code_of_null_partyName() {
-		StoreType obj3 = new StoreType("storeTypeCode", null);
-		int hashcode = obj3.hashCode();
-		assertEquals(obj3.hashCode(), hashcode);
-	} 
 	
 	@Test
     public void testToString()
