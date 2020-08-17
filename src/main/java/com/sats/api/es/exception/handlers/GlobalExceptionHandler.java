@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.sats.api.es.exception.ElasticSearchException;
-import com.sats.api.es.exception.RequestBodyValidationException;
+import com.sats.api.es.exception.RequestValidationException;
 import com.sats.api.es.utilites.ApiResponeUtility;
 
 import static com.sats.api.es.config.Constants.*;
@@ -36,8 +36,8 @@ public class GlobalExceptionHandler {
 		return elasticSearchException.getResponse();
 	}
 
-	@ExceptionHandler(value = RequestBodyValidationException.class)
-	public ResponseEntity<Object> headerValidationException(RequestBodyValidationException headerValidationException) {
+	@ExceptionHandler(value = RequestValidationException.class)
+	public ResponseEntity<Object> headerValidationException(RequestValidationException headerValidationException) {
 		return headerValidationException.getInfo();
 	}
 

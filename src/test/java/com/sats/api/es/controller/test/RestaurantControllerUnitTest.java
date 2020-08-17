@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sats.api.es.controller.RestaurantController;
 import com.sats.api.es.data.RestaurantSearchRepository;
 import com.sats.api.es.exception.ElasticSearchException;
-import com.sats.api.es.exception.RequestBodyValidationException;
+import com.sats.api.es.exception.RequestValidationException;
 import com.sats.api.es.model.Address;
 import com.sats.api.es.model.CurrentStatus;
 import com.sats.api.es.model.GeneralStatus;
@@ -110,7 +110,7 @@ class RestaurantControllerUnitTest {
 	} 
 
 	@Test
-	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_marketid() throws RequestBodyValidationException {
+	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_marketid() throws RequestValidationException {
 
 
 		Restaurant restaurant = RestaruantIngestObject();
@@ -118,10 +118,10 @@ class RestaurantControllerUnitTest {
 		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
 		expectedResponse.setStatus(400);
 		
-		doThrow(new RequestBodyValidationException()).when(headerValidationService)
+		doThrow(new RequestValidationException()).when(headerValidationService)
 									   .validateIngestRestaurantRequest("invalid", locale, uuid, jsonBody);
 		
-		assertThrows(RequestBodyValidationException.class, () -> {
+		assertThrows(RequestValidationException.class, () -> {
 			restController.ingestRestaurant("invalid", locale, uuid, jsonBody);
 		});
 		
@@ -130,17 +130,17 @@ class RestaurantControllerUnitTest {
 	}
 	
 	@Test
-	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_locale() throws RequestBodyValidationException {
+	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_locale() throws RequestValidationException {
 
 		Restaurant restaurant = RestaruantIngestObject();
 
 		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
 		expectedResponse.setStatus(400);
 		
-		doThrow(new RequestBodyValidationException()).when(headerValidationService)
+		doThrow(new RequestValidationException()).when(headerValidationService)
 									   .validateIngestRestaurantRequest(marketCode, "invalid", uuid, jsonBody);
 		
-		assertThrows(RequestBodyValidationException.class, () -> {
+		assertThrows(RequestValidationException.class, () -> {
 			restController.ingestRestaurant(marketCode, "invalid", uuid, jsonBody);
 		});
 		
@@ -149,17 +149,17 @@ class RestaurantControllerUnitTest {
 	}
 	
 	@Test
-	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_uuid() throws RequestBodyValidationException {
+	void ingestRestaurant_Throw_HeaderValidationException_having_invalid_uuid() throws RequestValidationException {
 
 		Restaurant restaurant = RestaruantIngestObject();
 
 		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
 		expectedResponse.setStatus(400);
 		
-		doThrow(new RequestBodyValidationException()).when(headerValidationService)
+		doThrow(new RequestValidationException()).when(headerValidationService)
 									   .validateIngestRestaurantRequest(marketCode, locale, "invalid", jsonBody);
 		
-		assertThrows(RequestBodyValidationException.class, () -> {
+		assertThrows(RequestValidationException.class, () -> {
 			restController.ingestRestaurant(marketCode, locale, "invalid", jsonBody);
 		});
 		

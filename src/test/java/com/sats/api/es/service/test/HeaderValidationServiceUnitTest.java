@@ -11,7 +11,7 @@ import org.mockito.quality.Strictness;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.sats.api.es.exception.RequestBodyValidationException;
+import com.sats.api.es.exception.RequestValidationException;
 import com.sats.api.es.model.Restaurant;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -47,7 +47,7 @@ class HeaderValidationServiceUnitTest {
 	@Test
 	public void testVlidateIngestRestaurantHeadersThrowsRequestValidationException() throws JsonProcessingException {
 		String jsonBody = mapper.writeValueAsString(restaurant);
-		assertThrows(RequestBodyValidationException.class, () -> {
+		assertThrows(RequestValidationException.class, () -> {
 			headerValidationService.validateIngestRestaurantRequest(null, "en-US", "123456", jsonBody);
 		});
 	}
