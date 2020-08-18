@@ -42,14 +42,14 @@ public class RestaurantService {
 			throws ElasticSearchException {
 		
 		restaurant.setMarketCode(marketCode);
-		restaurant.setLocalization(locale); 
-		restaurant.setId(restaurant.getGblNumber()+":"+locale); 
+		restaurant.setLocalization(locale);
+		restaurant.setId(restaurant.getGblNumber()+":"+locale);
 		
-		log.info("Generated Restaurant ID Before ingesting into elasticSearch");
-		log.debug("Restaurant ID is {} ",restaurant.getId());
+		log.debug("Generated Restaurant ID is {} ",restaurant.getId());
 		
 		Restaurant response = esService.insert(restaurant);
 		
+		log.debug("Inserted record into elastic search is = {}",response.toString());
 		return apiResponseUtility.successResponseCreator(response, INGEST_RESTAURANT_SUCCESS_MESSAGE, uuid);
 	}
 	

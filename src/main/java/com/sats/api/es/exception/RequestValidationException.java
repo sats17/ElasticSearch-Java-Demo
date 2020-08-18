@@ -16,7 +16,7 @@ public class RequestValidationException extends Exception {
 		this.response = response;
 	}
 
-	public ResponseEntity<Object> getInfo() {
+	public ResponseEntity<Object> getResponse() {
 		return response;
 	}
 	

@@ -2,8 +2,8 @@ package com.sats.api.es.controller;
 
 import static com.sats.api.es.config.Constants.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.time.Duration;
+import java.time.Instant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,13 +39,22 @@ public class RestaurantController {
 			@RequestHeader(value = LOCALE, required = true) String locale,
 			@RequestHeader(value = UUID, required = true) String uuid, 
 			@RequestBody String requestBody) throws RequestValidationException, ElasticSearchException {
-		
-		log.info("Request recieved for Data INGEST into elasticSearch."
+		Instant start = Instant.now();
+		log.info("Ingesting restaurant process starts at {}",start);		
+		log.debug("Request recieved for Data INGEST into elasticSearch."
 				+ "\n Headers : {} = {}, {} = {}, {} = {} \n Body: {} = {} ",
 				MARKET_CODE, marketCode, LOCALE, locale, UUID, uuid, "REQUEST-BODY", requestBody );
 
 		Restaurant restaurant = requestValidationService.validateIngestRestaurantRequest(marketCode, locale, uuid, requestBody);
 		log.debug("Converted String Request body to restaurant object = {}",restaurant.toString());
-		return restService.ingestRestaurant(marketCode, locale, uuid, restaurant);
+		ResponseEntity<Object> response = restService.ingestRestaurant(marketCode, locale, uuid, restaurant);
+		log.debug("Success Response = {}",response);
+		
+		Instant end = Instant.now();
+		Duration timeElapsed = Duration.between(start, end);
+		
+		log.info("Ingesting restaurant process ends at {}",end);
+		log.info("Total time taken by this request inside application is {} milliseconds",timeElapsed.toMillis());
+		return response;
 	}
 }

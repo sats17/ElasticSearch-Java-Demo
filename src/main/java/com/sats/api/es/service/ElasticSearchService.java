@@ -33,9 +33,11 @@ public class ElasticSearchService {
 
 	public Restaurant insert(Restaurant restaurant) throws ElasticSearchException {
 		try {
+			log.debug("Before inserting restaurant");
 			return restaurantRepository.save(restaurant);
 		} catch (Exception exception) {
-			log.error("Error occurs while ingesting data into elastic search", exception.getMessage());
+			log.info("Error occurs from insert method, while ingesting data into elastic search");
+			log.error(exception.getLocalizedMessage());
 			throw new ElasticSearchException(apiResponseUtility.applicationProcessingExceptionCreator(
 							ELASTIC_SEARCH_EXCEPTION_RESULT_CODE,
 							ELASTIC_SEARCH_EXCEPTION_RESULT_TYPE, ELASTIC_SEARCH_INGEST_EXCEPTION_MESSAGE));

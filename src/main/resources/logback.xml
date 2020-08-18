@@ -2,6 +2,6 @@
 <configuration>
 <!-- inheriting basic properties from base.xml -->
   <include resource= "org/springframework/boot/logging/logback/base.xml"></include>
-  <logger name="com.sats.api.es" level="TRACE"/>
+  <logger name="com.sats.api.es" level="DEBUG"/>
  
 </configuration>
