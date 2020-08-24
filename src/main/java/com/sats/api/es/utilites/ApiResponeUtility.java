@@ -39,7 +39,7 @@ public class ApiResponeUtility {
 						Collections.singletonList(new ErrorDetails(resultCode, resultType, message, null, null)))),
 				HttpStatus.INTERNAL_SERVER_ERROR);
 		log.debug("Respose from applicationProcessingExceptionCreator method, after internal server error occurs {} = ",
-				errorResponse.toString());
+				errorResponse.toString()); 
 		return errorResponse;
 	}
 
@@ -57,8 +57,9 @@ public class ApiResponeUtility {
 	public ResponseEntity<Object> successResponseCreator(Restaurant response, String message, String uuid) {
 		List<Restaurant> responseList = new ArrayList<>();
 		responseList.add(response);
+		Status status = new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, message);
 		ResponseEntity<Object> successResponse = new ResponseEntity<Object>(
-			   new FinalResponse(new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, message), responseList),
+			   new FinalResponse(status, responseList),
 			   getHttpHeaders(uuid), HttpStatus.OK);
 		log.debug("Respose from successResponseCreator method, after ingesting restaurant in elasticSearch {} = ",
 				successResponse.toString());
