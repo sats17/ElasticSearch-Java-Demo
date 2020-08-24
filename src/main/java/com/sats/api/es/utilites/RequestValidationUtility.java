@@ -43,7 +43,9 @@ public class RequestValidationUtility {
 	}
 
 	public static Restaurant validateRequestBody(String body) throws JsonProcessingException {
-		return mapper.readValue(body, Restaurant.class);
+		Restaurant restaurant = mapper.readValue(body, Restaurant.class);
+		log.debug("Converted String Request body to restaurant object = {}",restaurant.toString());
+		return restaurant;
 	}
 
 }

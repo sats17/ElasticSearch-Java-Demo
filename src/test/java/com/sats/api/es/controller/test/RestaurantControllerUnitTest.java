@@ -67,7 +67,7 @@ class RestaurantControllerUnitTest {
 	private RestaurantController restController;
 
 	@Mock
-	private RequestValidationService headerValidationService;
+	private RequestValidationService requestValidationService;
 
 	@Mock
 	private RestaurantSearchRepository restSearchRepo;
@@ -99,7 +99,7 @@ class RestaurantControllerUnitTest {
 		 
 		ArrayList<Restaurant> responseList = new ArrayList<>();
 		responseList.add(RestaruantReturnObject()); 
-
+		
 		when(restService.ingestRestaurant(marketCode, locale, uuid, null))
 				.thenReturn(new ResponseEntity<Object>(HttpStatus.OK));
 
@@ -118,14 +118,14 @@ class RestaurantControllerUnitTest {
 		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
 		expectedResponse.setStatus(400);
 		
-		doThrow(new RequestValidationException()).when(headerValidationService)
+		doThrow(new RequestValidationException()).when(requestValidationService)
 									   .validateIngestRestaurantRequest("invalid", locale, uuid, jsonBody);
 		
 		assertThrows(RequestValidationException.class, () -> {
 			restController.ingestRestaurant("invalid", locale, uuid, jsonBody);
 		});
 		
-		verify(headerValidationService).validateIngestRestaurantRequest("invalid", locale, uuid, jsonBody);
+		verify(requestValidationService).validateIngestRestaurantRequest("invalid", locale, uuid, jsonBody);
 
 	}
 	
@@ -137,14 +137,14 @@ class RestaurantControllerUnitTest {
 		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
 		expectedResponse.setStatus(400);
 		
-		doThrow(new RequestValidationException()).when(headerValidationService)
+		doThrow(new RequestValidationException()).when(requestValidationService)
 									   .validateIngestRestaurantRequest(marketCode, "invalid", uuid, jsonBody);
 		
 		assertThrows(RequestValidationException.class, () -> {
 			restController.ingestRestaurant(marketCode, "invalid", uuid, jsonBody);
 		});
 		
-		verify(headerValidationService).validateIngestRestaurantRequest(marketCode, "invalid", uuid, jsonBody);
+		verify(requestValidationService).validateIngestRestaurantRequest(marketCode, "invalid", uuid, jsonBody);
 
 	}
 	
@@ -156,14 +156,14 @@ class RestaurantControllerUnitTest {
 		MockHttpServletResponse expectedResponse = new MockHttpServletResponse();
 		expectedResponse.setStatus(400);
 		
-		doThrow(new RequestValidationException()).when(headerValidationService)
+		doThrow(new RequestValidationException()).when(requestValidationService)
 									   .validateIngestRestaurantRequest(marketCode, locale, "invalid", jsonBody);
 		
 		assertThrows(RequestValidationException.class, () -> {
 			restController.ingestRestaurant(marketCode, locale, "invalid", jsonBody);
 		});
 		
-		verify(headerValidationService).validateIngestRestaurantRequest(marketCode, locale, "invalid", jsonBody);
+		verify(requestValidationService).validateIngestRestaurantRequest(marketCode, locale, "invalid", jsonBody);
 
 	}
 	

@@ -46,7 +46,7 @@ public class RestaurantController {
 				MARKET_CODE, marketCode, LOCALE, locale, UUID, uuid, "REQUEST-BODY", requestBody );
 
 		Restaurant restaurant = requestValidationService.validateIngestRestaurantRequest(marketCode, locale, uuid, requestBody);
-		log.debug("Converted String Request body to restaurant object = {}",restaurant.toString());
+		
 		ResponseEntity<Object> response = restService.ingestRestaurant(marketCode, locale, uuid, restaurant);
 		log.debug("Success Response = {}",response);
 		

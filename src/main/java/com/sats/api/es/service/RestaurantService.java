@@ -49,7 +49,7 @@ public class RestaurantService {
 		
 		Restaurant response = esService.insert(restaurant);
 		
-		log.debug("Inserted record into elastic search is = {}",response.toString());
+		log.debug("Record inserted into elastic search");
 		return apiResponseUtility.successResponseCreator(response, INGEST_RESTAURANT_SUCCESS_MESSAGE, uuid);
 	}
 	
