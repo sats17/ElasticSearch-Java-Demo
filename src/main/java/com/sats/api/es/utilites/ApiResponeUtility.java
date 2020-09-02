@@ -45,10 +45,11 @@ public class ApiResponeUtility {
 
 	public ResponseEntity<Object> validationExceptionCreator(String uuid, int resultCode, String resultType,
 			String message, String method, String requestURI) {
+		String UUID = uuid;
 		ResponseEntity<Object> errorResponse = new ResponseEntity<Object>(
 			   new ErrorResponse(new ErrorStatus(VALIDATION_EXCEPTION_ROOT_CODE, VALIDATION_EXCEPTION_ROOT_TYPE,
 						Collections.singletonList(new ErrorDetails(resultCode, resultType, message, method, requestURI)))),
-				getHttpHeaders(uuid), HttpStatus.BAD_REQUEST);
+				getHttpHeaders(UUID), HttpStatus.BAD_REQUEST);
 		log.debug("Respose from validationExceptionCreator method, after validation error occurs {} = ",
 				errorResponse.toString());
 		return errorResponse;
@@ -57,10 +58,9 @@ public class ApiResponeUtility {
 	public ResponseEntity<Object> successResponseCreator(Restaurant response, String message, String uuid) {
 		List<Restaurant> responseList = new ArrayList<>();
 		responseList.add(response);
-		Status status = new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, message);
 		String UUID = uuid;
 		ResponseEntity<Object> successResponse = new ResponseEntity<Object>(
-			   new FinalResponse(status, responseList),
+			   new FinalResponse(new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, message), responseList),
 			   getHttpHeaders(UUID), HttpStatus.OK);
 		log.debug("Respose from successResponseCreator method, after ingesting restaurant in elasticSearch {} = ",
 				successResponse.toString());
