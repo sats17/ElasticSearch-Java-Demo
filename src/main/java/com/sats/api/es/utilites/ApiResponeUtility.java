@@ -59,8 +59,9 @@ public class ApiResponeUtility {
 		List<Restaurant> responseList = new ArrayList<>();
 		responseList.add(response);
 		String UUID = uuid;
+		Status status = new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, message);
 		ResponseEntity<Object> successResponse = new ResponseEntity<Object>(
-			   new FinalResponse(new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, message), responseList),
+			   new FinalResponse(status, responseList),
 			   getHttpHeaders(UUID), HttpStatus.OK);
 		log.debug("Respose from successResponseCreator method, after ingesting restaurant in elasticSearch {} = ",
 				successResponse.toString());
