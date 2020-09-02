@@ -11,6 +11,8 @@ import com.sats.api.es.exception.ElasticSearchException;
 import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.utilites.ApiResponeUtility;
 
+import lombok.extern.slf4j.Slf4j;
+
 import static com.sats.api.es.config.Constants.*;
 
 /**
@@ -18,6 +20,7 @@ import static com.sats.api.es.config.Constants.*;
  *
  */
 
+@Slf4j
 @Service
 public class RestaurantService { 
 	
@@ -39,10 +42,14 @@ public class RestaurantService {
 			throws ElasticSearchException {
 		
 		restaurant.setMarketCode(marketCode);
-		restaurant.setLocalization(locale); 
-		restaurant.setId(restaurant.getGblNumber()+":"+locale); 
+		restaurant.setLocalization(locale);
+		restaurant.setId(restaurant.getGblNumber()+":"+locale);
+		
+		log.debug("Generated Restaurant ID is {} ",restaurant.getId());
+		
 		Restaurant response = esService.insert(restaurant);
 		
+		log.debug("Record inserted into elastic search");
 		return apiResponseUtility.successResponseCreator(response, INGEST_RESTAURANT_SUCCESS_MESSAGE, uuid);
 	}
 	

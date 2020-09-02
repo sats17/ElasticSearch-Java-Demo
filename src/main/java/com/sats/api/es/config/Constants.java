@@ -4,9 +4,17 @@ public class Constants {
 	
 	private Constants() {}
 	
+	// API Path Constants
 	public static final String BASE_API_PATH = "/api/restaurants";
 	public static final String RESTAURANT_INGEST_PATH = "/ingest";
+	
+	// Miscellaneous Constants
+	public static final String MARKET_CODE = "sats-marketid";
+	public static final String LOCALE = "sats-locale";
+	public static final String UUID = "sats-uuid";
+	public static final String REQUEST_BODY = "request-body";
 
+	// API Error details Constants
 	public static final int SUCCESS_ROOT_CODE = 20000;
 	public static final String SUCCESS_ROOT_TYPE = "Success";
 	public static final String INGEST_RESTAURANT_SUCCESS_MESSAGE = "Restaurant insert successfully";

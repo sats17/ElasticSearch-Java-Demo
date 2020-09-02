@@ -13,6 +13,8 @@ import com.sats.api.es.model.Restaurant;
 import com.sats.api.es.response.FinalResponse;
 import com.sats.api.es.response.Status;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 
@@ -26,30 +28,44 @@ import java.util.List;
  * @author Sats17
  *
  */
+
+@Slf4j
 @Service
 public class ApiResponeUtility {
 
 	public ResponseEntity<Object> applicationProcessingExceptionCreator(int resultCode, String resultType, String message) {
-		return new ResponseEntity<Object>(
+		ResponseEntity<Object> errorResponse = new ResponseEntity<Object>(
 			   new ErrorResponse(new ErrorStatus(SERVER_EXCEPTION_ROOT_CODE, SERVER_EXCEPTION_ROOT_TYPE,
 						Collections.singletonList(new ErrorDetails(resultCode, resultType, message, null, null)))),
-				HttpStatus.INTERNAL_SERVER_ERROR);  
+				HttpStatus.INTERNAL_SERVER_ERROR);
+		log.debug("Respose from applicationProcessingExceptionCreator method, after internal server error occurs {} = ",
+				errorResponse.toString()); 
+		return errorResponse;
 	}
 
 	public ResponseEntity<Object> validationExceptionCreator(String uuid, int resultCode, String resultType,
 			String message, String method, String requestURI) {
-		return new ResponseEntity<Object>(
+		String UUID = uuid;
+		ResponseEntity<Object> errorResponse = new ResponseEntity<Object>(
 			   new ErrorResponse(new ErrorStatus(VALIDATION_EXCEPTION_ROOT_CODE, VALIDATION_EXCEPTION_ROOT_TYPE,
 						Collections.singletonList(new ErrorDetails(resultCode, resultType, message, method, requestURI)))),
-				getHttpHeaders(uuid), HttpStatus.BAD_REQUEST);
+				getHttpHeaders(UUID), HttpStatus.BAD_REQUEST);
+		log.debug("Respose from validationExceptionCreator method, after validation error occurs {} = ",
+				errorResponse.toString());
+		return errorResponse;
 	} 
 	
 	public ResponseEntity<Object> successResponseCreator(Restaurant response, String message, String uuid) {
 		List<Restaurant> responseList = new ArrayList<>();
 		responseList.add(response);
-		return new ResponseEntity<Object>(
-			   new FinalResponse(new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, message), responseList),
-			   getHttpHeaders(uuid), HttpStatus.OK);
+		String UUID = uuid;
+		Status status = new Status(SUCCESS_ROOT_CODE, SUCCESS_ROOT_TYPE, message);
+		ResponseEntity<Object> successResponse = new ResponseEntity<Object>(
+			   new FinalResponse(status, responseList),
+			   getHttpHeaders(UUID), HttpStatus.OK);
+		log.debug("Respose from successResponseCreator method, after ingesting restaurant in elasticSearch {} = ",
+				successResponse.toString());
+		return successResponse;
 	}
 
 	public HttpHeaders getHttpHeaders(String uuid) {
