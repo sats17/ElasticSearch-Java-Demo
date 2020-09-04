@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sats.api.es.exception.ElasticSearchException;
 import com.sats.api.es.exception.RequestValidationException;
 import com.sats.api.es.model.Restaurant;
+import com.sats.api.es.response.FinalResponse;
 import com.sats.api.es.service.RequestValidationService;
 import com.sats.api.es.service.RestaurantService;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -34,6 +36,9 @@ public class RestaurantController {
 //	Logger log = LoggerFactory.getLogger(RestaurantController.class);
 
 	@PostMapping(RESTAURANT_INGEST_PATH)
+	@ApiOperation(value = "Ingest restaurant into elasticsearch",
+				  notes = "Provide an restaurant object to add restaurant into elastic search"
+				)
 	public ResponseEntity<Object> ingestRestaurant(
 			@RequestHeader(value = MARKET_CODE, required = true) String marketCode,
 			@RequestHeader(value = LOCALE, required = true) String locale,

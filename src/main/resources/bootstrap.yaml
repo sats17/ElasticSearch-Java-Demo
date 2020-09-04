@@ -9,3 +9,5 @@ logging:
   level:
     ROOT: TRACE
 server.port: 9999
+management.endpoint.health.enabled: true
+management.endpoints.enabled-by-default: false
