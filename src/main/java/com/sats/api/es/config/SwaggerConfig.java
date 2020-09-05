@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
@@ -32,7 +31,7 @@ public class SwaggerConfig {
 	      "CRUD Operations for elastic search using Java-Spring boot", 
 	      "1.0", 
 	      "Free to use", 
-	      new Contact("Sats17", "www.github.com/sats17", "satishkumbhar9999@gmail.com"), 
+	      new Contact("Sats17[Github]", "https://github.com/sats17", null), 
 	      "License of API",
 	      "API license URL",
 	      Collections.emptyList());

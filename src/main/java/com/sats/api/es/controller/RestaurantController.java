@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sats.api.es.exception.ElasticSearchException;
 import com.sats.api.es.exception.RequestValidationException;
 import com.sats.api.es.model.Restaurant;
-import com.sats.api.es.response.FinalResponse;
 import com.sats.api.es.service.RequestValidationService;
 import com.sats.api.es.service.RestaurantService;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -39,6 +40,11 @@ public class RestaurantController {
 	@ApiOperation(value = "Ingest restaurant into elasticsearch",
 				  notes = "Provide an restaurant object to add restaurant into elastic search"
 				)
+	@ApiResponses(value = { 
+            @ApiResponse(code = 200, message = "Success | Restaurant ingested"),
+            @ApiResponse(code = 400, message = "Bad Request | Validation Exception"),
+            @ApiResponse(code = 500, message = "Internal Server Error") 
+            })
 	public ResponseEntity<Object> ingestRestaurant(
 			@RequestHeader(value = MARKET_CODE, required = true) String marketCode,
 			@RequestHeader(value = LOCALE, required = true) String locale,

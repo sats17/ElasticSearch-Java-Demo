@@ -9,8 +9,6 @@ import com.sats.api.es.exception.ElasticSearchException;
 import com.sats.api.es.exception.RequestValidationException;
 import com.sats.api.es.utilites.ApiResponeUtility;
 
-import lombok.extern.slf4j.Slf4j;
-
 import static com.sats.api.es.config.Constants.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
-@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
