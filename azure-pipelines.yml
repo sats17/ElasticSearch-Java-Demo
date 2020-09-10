@@ -43,7 +43,7 @@
       sqMavenPluginVersionChoice: 'latest'
       codeCoverageToolOption: 'JaCoCo'
       testResultsFiles: '**/TEST-*.xml'
-      goals: 'build'
+      goals: 'verify'
 
 
 # Uncomment the next task to wait until SonarCloud processing has
