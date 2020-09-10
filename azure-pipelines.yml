@@ -38,12 +38,12 @@
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
       mavenAuthenticateFeed: true
-      effectivePomSkip: false
+      effectivePomSkip: true
       sonarQubeRunAnalysis: true
       sqMavenPluginVersionChoice: 'latest'
       codeCoverageToolOption: 'JaCoCo'
       testResultsFiles: '**/TEST-*.xml'
-      goals: 'verify'
+      goals: 'deploy'
 
 
 # Uncomment the next task to wait until SonarCloud processing has
