@@ -99,7 +99,7 @@
 		</repository>
 	</repositories>
 	
-	<build>
+	<!-- <build>
 		<plugins>
 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
@@ -144,7 +144,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>
+	</build> -->
 
 	<profiles>
 		<profile>
