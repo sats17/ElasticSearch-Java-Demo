@@ -37,7 +37,7 @@
       jdkVersionOption: '1.11'
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
-      mavenAuthenticateFeed: false
+      mavenAuthenticateFeed: true
       effectivePomSkip: false
       sonarQubeRunAnalysis: true
       sqMavenPluginVersionChoice: 'latest'
