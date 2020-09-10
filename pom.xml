@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.sats.api</groupId>
 	<artifactId>Elasticsearch_Java</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>Elasticsearch_Java</name>
 	<description>Demo project for Spring Boot with elasticsearch</description>
 
@@ -88,9 +88,9 @@
 	</repositories> -->
 	<repositories>
 		<repository>
-  			<id>ES-Java-Demo-Artifacts</id>
-  			<url>https://pkgs.dev.azure.com/satishakumbhar/70387bb4-bfae-4027-a089-52fac4ee7c6c/_packaging/ES-Java-Demo-Artifacts/maven/v1</url>
- 		 	<releases>
+  			<id>ES-Java-Artifacts</id>
+  			<url>https://pkgs.dev.azure.com/satishakumbhar/70387bb4-bfae-4027-a089-52fac4ee7c6c/_packaging/ES-Java-Artifacts/maven/v1</url>
+  			<releases>
     			<enabled>true</enabled>
   			</releases>
   			<snapshots>
