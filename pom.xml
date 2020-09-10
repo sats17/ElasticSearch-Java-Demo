@@ -87,6 +87,17 @@
 		</repository>
 	</repositories> -->
 
+	<repository>
+  		<id>ES-Java-Demo-Artifacts</id>
+  		<url>https://pkgs.dev.azure.com/satishakumbhar/70387bb4-bfae-4027-a089-52fac4ee7c6c/_packaging/ES-Java-Demo-Artifacts/maven/v1</url>
+ 		 <releases>
+    		<enabled>true</enabled>
+  		</releases>
+  		<snapshots>
+    		<enabled>true</enabled>
+  		</snapshots>
+	</repository>
+
 	<build>
 		<plugins>
 			<plugin>
