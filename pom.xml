@@ -118,16 +118,7 @@
 	<!-- </plugins> -->
 	<!-- </build> -->
 
-	<profiles>
-		<profile>
-			<properties>
-  				<sonar.projectKey>sats17_ElasticSearch-Java-Demo</sonar.projectKey>
-  				<sonar.organization>sats17</sonar.organization>
-  				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-			</properties>
-			
-		</profile>
-	</profiles>
+	
 
 
 
