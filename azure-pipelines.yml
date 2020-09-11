@@ -37,13 +37,13 @@
       jdkVersionOption: '1.11'
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
-      mavenAuthenticateFeed: false
-      effectivePomSkip: false
+      mavenAuthenticateFeed: true
+      effectivePomSkip: true
       sonarQubeRunAnalysis: true
       sqMavenPluginVersionChoice: 'latest'
       codeCoverageToolOption: 'JaCoCo'
       testResultsFiles: '**/TEST-*.xml'
-      goals: 'verify'
+      goals: 'deploy'
 
 
 # Uncomment the next task to wait until SonarCloud processing has
@@ -52,3 +52,25 @@
     displayName: 'Publish results on build summary'
     inputs:
       pollingTimeoutSec: '300'
+
+  # - task: PublishBuildArtifacts@1
+  #   inputs:
+  #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  #     ArtifactName: 'drop'
+  #     publishLocation: 'Container'
+
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+    inputs:
+      SourceFolder: '$(system.defaultworkingdirectory)'
+      Contents: '**/*.jar'
+      TargetFolder: '$(build.artifactstagingdirectory)'
+    condition: succeededOrFailed()
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+      condition: succeededOrFailed()
+  
+  
