@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.sats.api</groupId>
 	<artifactId>Elasticsearch_Java</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<name>Elasticsearch_Java</name>
 	<description>Demo project for Spring Boot with elasticsearch</description>
 
@@ -25,14 +25,6 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-elasticsearch</artifactId>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/com.github.vanroy/spring-data-jest -->
-		<dependency>
-			<groupId>com.github.vanroy</groupId>
-			<artifactId>spring-data-jest</artifactId>
-			<version>3.3.1.RELEASE</version>
 		</dependency>
 
 		<!-- Swagger -->
@@ -79,67 +71,64 @@
 		</dependency>
 	</dependencies>
 
-	<repositories>
-		<repository>
-			<id>jcenter-snapshots</id>
-			<name>jcenter</name>
-			<url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
-		</repository>
-	</repositories>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.sonarsource.scanner.maven</groupId>
-				<artifactId>sonar-maven-plugin</artifactId>
-				<version>3.5.0.1254</version>
-				<executions>
-					<execution>
-						<phase>verify</phase>
-						<goals>
-							<goal>sonar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.2</version>
-				<configuration>
-					<append>true</append>
-				</configuration>
-				<executions>
-					<execution>
-						<id>prepare-agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>prepare-agent-integration</id>
-						<goals>
-							<goal>prepare-agent-integration</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>jacoco-site</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	<!-- <build> -->
+	<!-- <plugins> -->
+	<!-- <plugin> -->
+	<!-- <groupId>org.sonarsource.scanner.maven</groupId> -->
+	<!-- <artifactId>sonar-maven-plugin</artifactId> -->
+	<!-- <version>3.5.0.1254</version> -->
+	<!-- <executions> -->
+	<!-- <execution> -->
+	<!-- <phase>verify</phase> -->
+	<!-- <goals> -->
+	<!-- <goal>sonar</goal> -->
+	<!-- </goals> -->
+	<!-- </execution> -->
+	<!-- </executions> -->
+	<!-- </plugin> -->
+	<!-- <plugin> -->
+	<!-- <groupId>org.jacoco</groupId> -->
+	<!-- <artifactId>jacoco-maven-plugin</artifactId> -->
+	<!-- <version>0.8.2</version> -->
+	<!-- <configuration> -->
+	<!-- <append>true</append> -->
+	<!-- </configuration> -->
+	<!-- <executions> -->
+	<!-- <execution> -->
+	<!-- <id>prepare-agent</id> -->
+	<!-- <goals> -->
+	<!-- <goal>prepare-agent</goal> -->
+	<!-- </goals> -->
+	<!-- </execution> -->
+	<!-- <execution> -->
+	<!-- <id>prepare-agent-integration</id> -->
+	<!-- <goals> -->
+	<!-- <goal>prepare-agent-integration</goal> -->
+	<!-- </goals> -->
+	<!-- </execution> -->
+	<!-- <execution> -->
+	<!-- <id>jacoco-site</id> -->
+	<!-- <phase>verify</phase> -->
+	<!-- <goals> -->
+	<!-- <goal>report</goal> -->
+	<!-- </goals> -->
+	<!-- </execution> -->
+	<!-- </executions> -->
+	<!-- </plugin> -->
+	<!-- </plugins> -->
+	<!-- </build> -->
 
 	<profiles>
 		<profile>
 			<id>sonar</id>
+<!-- 			<properties> -->
+<!-- 				<sonar.host.url>https://sonarcloud.io</sonar.host.url> -->
+<!-- 				<sonar.organization>sats17</sonar.organization> -->
+<!-- 			</properties> -->
 			<properties>
-				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+				<sonar.projectKey>sats17_ElasticSearch-Java-Demo</sonar.projectKey>
 				<sonar.organization>sats17</sonar.organization>
+				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 			</properties>
 			<build>
 				<plugins>
@@ -155,5 +144,7 @@
 			</build>
 		</profile>
 	</profiles>
+
+
 
 </project>
