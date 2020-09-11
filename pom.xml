@@ -98,6 +98,17 @@
   			</snapshots>
 		</repository>
 	</repositories>
+
+	<distributionManagement>
+		<id>ES-Java-Artifacts</id>
+  		<url>https://pkgs.dev.azure.com/satishakumbhar/70387bb4-bfae-4027-a089-52fac4ee7c6c/_packaging/ES-Java-Artifacts/maven/v1</url>
+  		<releases>
+    		<enabled>true</enabled>
+  		</releases>
+  		<snapshots>
+    		<enabled>true</enabled>
+  		</snapshots>
+	</distributionManagement>
 	
 	<!-- <build>
 		<plugins>
