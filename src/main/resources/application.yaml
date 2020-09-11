@@ -2,7 +2,7 @@ spring:
     application: 
        name: ElasticSearchWithSpringBoot
     profiles:      active: dev
-    elasticsearch:      rest:        uris: https://xd4p3yiex8:6z8exwthze@es-test-1035711536.us-east-1.bonsaisearch.net:443
+    elasticsearch:      rest:        uris: http://localhost:9200
 
 logging:
   level:
