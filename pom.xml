@@ -120,23 +120,12 @@
 
 	<profiles>
 		<profile>
-			<id>sonar</id>
 			<properties>
- 				<sonar.host.url>https://sonarcloud.io</sonar.host.url> -->
- 				<sonar.organization>sats17</sonar.organization> -->
- 			</properties> 
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.jacoco</groupId>
-						<artifactId>jacoco-maven-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.sonarsource.scanner.maven</groupId>
-						<artifactId>sonar-maven-plugin</artifactId>
-					</plugin>
-				</plugins>
-			</build>
+  				<sonar.projectKey>sats17_ElasticSearch-Java-Demo</sonar.projectKey>
+  				<sonar.organization>sats17</sonar.organization>
+  				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+			</properties>
+			
 		</profile>
 	</profiles>
 
