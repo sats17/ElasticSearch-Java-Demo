@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - feature/restaurant_ingest
   pull_request:
       types: [opened, synchronize, reopened]
 name: Main Workflow
