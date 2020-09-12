@@ -75,9 +75,9 @@
 	<profiles>
 		<profile>
 			<properties>
-  				<sonar.projectKey>ElasticSearch-Java-Demo</sonar.projectKey>
+				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  				<sonar.projectKey>com.sats.api:Elasticsearch_Java</sonar.projectKey>
   				<sonar.organization>sats17</sonar.organization>
-  				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 			</properties>
 			<build>
 				<plugins>
