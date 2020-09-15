@@ -23,7 +23,7 @@ jobs:
     - name: Build with Maven
       run: mvn clean verify
       
-    - name: perform code coverage result
+    - name: CodeCoverage
       uses: codecov/codecov-action@v1
       with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
