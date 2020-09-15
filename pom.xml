@@ -72,13 +72,13 @@
 	</dependencies>
 	
 	
-	<profiles>
+<!-- 	<profiles>
 		<profile>
-			<properties>
+<!-- 			<properties>
 				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
   				<sonar.projectKey>com.sats.api:Elasticsearch_Java</sonar.projectKey>
   				<sonar.organization>sats17</sonar.organization>
-			</properties>
+			</properties> -->
 			<build>
 				<plugins>
 					<plugin>
@@ -92,11 +92,11 @@
 				</plugins>
 			</build>
 		</profile>
-	</profiles>
+	</profiles> -->
 
 	<build>
 		<plugins>
-			<plugin>
+<!-- 			<plugin>
 				<groupId>org.sonarsource.scanner.maven</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
 				<version>3.5.0.1254</version>
@@ -108,7 +108,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
