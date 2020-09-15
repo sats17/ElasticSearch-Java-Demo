@@ -8,7 +8,7 @@ on:
       - feature/*
   pull_request:
       branches: [develop, main]
-name: Main Workflow
+name: Build
 jobs:
   CodeQuality:
     runs-on: ubuntu-latest
@@ -20,11 +20,11 @@ jobs:
       uses: actions/setup-java@v1
       with:
           java-version: 1.11
-    - name: Build with Maven
+    - name: mavenBuild
       run: mvn clean verify
       
-    - name: perform code coverage result
+    - name: CodeCoverage
       uses: codecov/codecov-action@v1
       with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          token: ${{ secrets.CODECOV_TOKEN }}
    
