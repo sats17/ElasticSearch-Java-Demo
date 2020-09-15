@@ -12,6 +12,5 @@ logging:
     ROOT: INFO
 server.port: 9999
 
-sonar:
-    organization: sats17
-    projectKey: sats17_ElasticSearch-Java-Demo
+# sonar.projectKey: sats17_ElasticSearch-Java-Demo
+# sonar.organization: sats17
