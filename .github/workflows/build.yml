@@ -8,7 +8,7 @@ on:
       - feature/*
   pull_request:
       branches: [develop, main]
-name: Main Workflow
+name: MainWorkflow
 jobs:
   CodeQuality:
     runs-on: ubuntu-latest
