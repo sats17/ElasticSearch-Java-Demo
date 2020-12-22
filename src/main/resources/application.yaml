@@ -1,0 +1,16 @@
+spring:
+    application: 
+       name: ElasticSearchWithSpringBoot
+    profiles:
+      active: dev
+    elasticsearch:
+      rest:
+        uris: http://localhost:9200
+
+logging:
+  level:
+    ROOT: INFO
+server.port: 9999
+
+# sonar.projectKey: sats17_ElasticSearch-Java-Demo
+# sonar.organization: sats17
